@@ -1,16 +1,12 @@
 "use client";
 
-import { useSession } from "@/lib/auth-client";
-
 export default function Home() {
-  const { data, isPending } = useSession();
-
-  if (isPending) return <p>Loading...</p>;
-
   return (
-    <main style={{ padding: 40 }}>
-      <h1>MentorLagbe</h1>
-      <pre>{JSON.stringify(data, null, 2)}</pre>
+    <main className="mx-auto max-w-7xl px-4 py-20">
+      <h1 className="text-4xl font-bold">MentorLagbe</h1>
+      <p className="mt-3 text-muted-foreground">
+        Home page coming soon.
+      </p>
     </main>
   );
 }
