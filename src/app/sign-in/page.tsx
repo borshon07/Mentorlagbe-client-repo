@@ -11,6 +11,7 @@ import { signIn } from "@/lib/auth-client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { clearToken } from "@/lib/api";
 
 const schema = z.object({
   email: z.string().email("Enter a valid email address"),
@@ -44,6 +45,7 @@ export default function SignInPage() {
       return;
     }
     toast.success("Signed in successfully");
+    clearToken();
     router.push("/dashboard");
     router.refresh();
   };
