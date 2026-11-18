@@ -1,12 +1,19 @@
-"use client";
+import Hero from "@/components/ui/home/Hero";
+import FeaturedTuitions from "@/components/ui/home/FeaturedTuitions";
+import HowItWorks from "@/components/ui/home/HowItWorks";
+import TopSubjects from "@/components/ui/home/TopSubjects";
+import PricingSection from "@/components/ui/home/PricingSection";
+import Testimonials from "@/components/ui/home/Testimonials";
 
 export default function Home() {
   return (
-    <main className="mx-auto max-w-7xl px-4 py-20">
-      <h1 className="text-4xl font-bold">MentorLagbe</h1>
-      <p className="mt-3 text-muted-foreground">
-        Home page coming soon.
-      </p>
+    <main>
+      <Hero />
+      <FeaturedTuitions />
+      <HowItWorks />
+      <TopSubjects />
+      <PricingSection />
+      <Testimonials />
     </main>
   );
 }
