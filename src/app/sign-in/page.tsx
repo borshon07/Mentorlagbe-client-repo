@@ -8,10 +8,12 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { toast } from "sonner";
 import { signIn } from "@/lib/auth-client";
+import { clearToken } from "@/lib/api";
+import AuthShell from "@/components/ui/shared/AuthShell";
+import GoogleButton from "@/components/ui/shared/GoogleButton";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { clearToken } from "@/lib/api";
 
 const schema = z.object({
   email: z.string().email("Enter a valid email address"),
@@ -28,9 +30,7 @@ export default function SignInPage() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormValues>({
-    resolver: zodResolver(schema),
-  });
+  } = useForm<FormValues>({ resolver: zodResolver(schema) });
 
   const onSubmit = async (values: FormValues) => {
     setLoading(true);
@@ -51,52 +51,52 @@ export default function SignInPage() {
   };
 
   return (
-    <main className="flex min-h-screen items-center justify-center px-4 py-10">
-      <div className="w-full max-w-md rounded-2xl border bg-card p-8 shadow-sm">
-        <h1 className="text-2xl font-bold">Welcome back</h1>
-        <p className="mt-1 text-sm text-muted-foreground">
-          Sign in to continue to MentorLagbe.
-        </p>
+    <AuthShell
+      heading={
+        <>
+          Welcome back to <span className="text-[#e9c9a5]">MentorLagbe</span>.
+        </>
+      }
+      points={[
+        "Pick up right where you left off",
+        "Check your application status instantly",
+        "Manage your batches and applicants",
+      ]}
+    >
+      <h1 className="text-2xl font-bold">Welcome back</h1>
+      <p className="mt-1 text-sm text-muted-foreground">
+        Sign in to continue to MentorLagbe.
+      </p>
 
-        <form onSubmit={handleSubmit(onSubmit)} className="mt-6 space-y-4">
-          <div className="space-y-2">
-            <Label htmlFor="email">Email</Label>
-            <Input
-              id="email"
-              type="email"
-              placeholder="you@example.com"
-              {...register("email")}
-            />
-            {errors.email && (
-              <p className="text-sm text-red-500">{errors.email.message}</p>
-            )}
-          </div>
+      <form onSubmit={handleSubmit(onSubmit)} className="mt-6 space-y-4">
+        <div className="space-y-2">
+          <Label htmlFor="email">Email</Label>
+          <Input id="email" type="email" placeholder="you@example.com" {...register("email")} />
+          {errors.email && <p className="text-sm text-red-500">{errors.email.message}</p>}
+        </div>
 
-          <div className="space-y-2">
-            <Label htmlFor="password">Password</Label>
-            <Input
-              id="password"
-              type="password"
-              placeholder="Your password"
-              {...register("password")}
-            />
-            {errors.password && (
-              <p className="text-sm text-red-500">{errors.password.message}</p>
-            )}
-          </div>
+        <div className="space-y-2">
+          <Label htmlFor="password">Password</Label>
+          <Input id="password" type="password" placeholder="Your password" {...register("password")} />
+          {errors.password && <p className="text-sm text-red-500">{errors.password.message}</p>}
+        </div>
 
-          <Button type="submit" className="w-full" disabled={loading}>
-            {loading ? "Signing in..." : "Sign In"}
-          </Button>
-        </form>
+        <Button type="submit" className="w-full" disabled={loading}>
+          {loading ? "Signing in..." : "Sign In"}
+        </Button>
+      </form>
 
-        <p className="mt-6 text-center text-sm text-muted-foreground">
-          Don&apos;t have an account?{" "}
-          <Link href="/sign-up" className="font-medium text-primary underline">
-            Sign Up
-          </Link>
-        </p>
+      <div className="my-5 flex items-center gap-3 text-xs text-muted-foreground">
+        <span className="h-px flex-1 bg-border" /> OR <span className="h-px flex-1 bg-border" />
       </div>
-    </main>
+      <GoogleButton label="Continue with Google" />
+
+      <p className="mt-6 text-center text-sm text-muted-foreground">
+        Don&apos;t have an account?{" "}
+        <Link href="/sign-up" className="font-semibold text-primary hover:underline">
+          Sign Up
+        </Link>
+      </p>
+    </AuthShell>
   );
 }

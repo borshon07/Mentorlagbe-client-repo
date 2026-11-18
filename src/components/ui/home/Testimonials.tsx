@@ -1,4 +1,6 @@
-import { Star } from "lucide-react";
+import { Star, Quote } from "lucide-react";
+import Reveal from "@/components/ui/shared/Reveal";
+import SectionHeading from "@/components/ui/shared/SectionHeading";
 
 const ITEMS = [
   { name: "Nusrat Jahan", role: "HSC Student", text: "I found a Physics batch within a day. Applying and tracking the status was really easy." },
@@ -8,34 +10,39 @@ const ITEMS = [
 
 export default function Testimonials() {
   return (
-    <section className="bg-muted/40 py-16">
-      <div className="mx-auto max-w-7xl px-4">
-        <div className="text-center">
-          <h2 className="text-3xl font-bold">What Our Users Say</h2>
-          <p className="mt-2 text-muted-foreground">Real feedback from students, parents and tutors.</p>
-        </div>
+    <section className="relative py-20">
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-transparent" />
+      <div className="relative mx-auto max-w-7xl px-4">
+        <SectionHeading
+          eyebrow="Testimonials"
+          title="What Our Users Say"
+          subtitle="Real feedback from students, parents and tutors."
+        />
 
-        <div className="mt-10 grid gap-6 md:grid-cols-3">
-          {ITEMS.map((t) => (
-            <div key={t.name} className="flex h-full flex-col rounded-2xl border bg-card p-6 shadow-sm">
-              <div className="flex gap-1">
-                {Array.from({ length: 5 }).map((_, i) => (
-                  <Star key={i} className="h-4 w-4 fill-amber-400 text-amber-400" />
-                ))}
-              </div>
-              <p className="mt-4 flex-1 text-sm leading-relaxed text-muted-foreground">
-                &ldquo;{t.text}&rdquo;
-              </p>
-              <div className="mt-5 flex items-center gap-3">
-                <span className="flex h-10 w-10 items-center justify-center rounded-full bg-primary font-semibold text-primary-foreground">
-                  {t.name.charAt(0)}
-                </span>
-                <div>
-                  <p className="text-sm font-semibold">{t.name}</p>
-                  <p className="text-xs text-muted-foreground">{t.role}</p>
+        <div className="mt-12 grid gap-6 md:grid-cols-3">
+          {ITEMS.map((t, i) => (
+            <Reveal key={t.name} delay={i * 100} className="h-full">
+              <div className="glass flex h-full flex-col rounded-2xl p-6">
+                <Quote className="h-7 w-7 text-primary/40" />
+                <div className="mt-3 flex gap-1">
+                  {Array.from({ length: 5 }).map((_, k) => (
+                    <Star key={k} className="h-4 w-4 fill-[#e9c9a5] text-[#e9c9a5]" />
+                  ))}
+                </div>
+                <p className="mt-4 flex-1 text-sm leading-relaxed text-muted-foreground">
+                  &ldquo;{t.text}&rdquo;
+                </p>
+                <div className="mt-6 flex items-center gap-3">
+                  <span className="btn-accent flex h-10 w-10 items-center justify-center rounded-full font-semibold">
+                    {t.name.charAt(0)}
+                  </span>
+                  <div>
+                    <p className="text-sm font-semibold">{t.name}</p>
+                    <p className="text-xs text-muted-foreground">{t.role}</p>
+                  </div>
                 </div>
               </div>
-            </div>
+            </Reveal>
           ))}
         </div>
       </div>

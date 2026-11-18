@@ -7,6 +7,7 @@ import { toast } from "sonner";
 import { authFetch } from "@/lib/api";
 import { useSession } from "@/lib/auth-client";
 import { Button, buttonVariants } from "@/components/ui/button";
+import SectionHeading from "@/components/ui/shared/SectionHeading";
 
 const PLANS = [
   {
@@ -100,18 +101,17 @@ export default function PricingSection() {
 
   return (
     <section className="mx-auto max-w-7xl px-4 py-16">
-      <div className="text-center">
-        <h2 className="text-3xl font-bold">Simple, transparent pricing</h2>
-        <p className="mt-2 text-muted-foreground">
-          Start free. Upgrade to Pro when you need more.
-        </p>
-      </div>
+      <SectionHeading
+        eyebrow="Pricing"
+        title="Simple, transparent pricing"
+        subtitle="Start free. Upgrade to Pro when you need more."
+      />
 
       <div className="mt-10 grid gap-6 md:grid-cols-2">
         {PLANS.map((p) => (
           <div
             key={p.key}
-            className="flex h-full flex-col rounded-2xl border bg-card p-6 shadow-sm"
+            className="glass flex h-full flex-col rounded-2xl p-6"
           >
             <h3 className="text-xl font-semibold">{p.title} Plans</h3>
 
@@ -131,7 +131,8 @@ export default function PricingSection() {
                 </ul>
               </div>
 
-              <div className="rounded-xl border-2 border-primary p-4">
+              <div className="rounded-xl border-2 border-primary bg-primary/5 p-4">
+                {" "}
                 <p className="text-sm font-semibold uppercase text-primary">
                   Pro
                 </p>
