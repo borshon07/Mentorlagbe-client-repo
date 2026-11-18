@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
@@ -18,9 +18,19 @@ export default function Navbar() {
   const router = useRouter();
   const { data: session, isPending } = useSession();
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   const user = session?.user;
   const role = (user as { role?: string } | undefined)?.role ?? "student";
+
+  // Home er top e transparent, baki shob jaygay glass
+  const transparent = pathname === "/" && !scrolled && !open;
 
   const handleSignOut = async () => {
     await signOut();
@@ -31,12 +41,21 @@ export default function Navbar() {
     router.refresh();
   };
 
-  const linkClass = (href: string) =>
-    `rounded-full px-3 py-2 text-sm font-medium transition xl:px-4 ${
-      pathname === href
+  const linkClass = (href: string) => {
+    const active = pathname === href;
+    if (transparent) {
+      return `rounded-full px-3 py-2 text-sm font-semibold transition xl:px-4 ${
+        active
+          ? "bg-white/15 text-white ring-1 ring-white/30"
+          : "text-white/80 hover:bg-white/10 hover:text-white"
+      }`;
+    }
+    return `rounded-full px-3 py-2 text-sm font-medium transition xl:px-4 ${
+      active
         ? "bg-primary/12 text-primary ring-1 ring-primary/25"
         : "text-foreground/70 hover:bg-foreground/5 hover:text-foreground"
     }`;
+  };
 
   const mobileLinkClass = (href: string) =>
     `rounded-xl px-3 py-2.5 text-sm font-medium transition ${
@@ -44,6 +63,14 @@ export default function Navbar() {
         ? "bg-primary/12 text-primary"
         : "text-foreground/70 hover:bg-foreground/5"
     }`;
+
+  const outlineBtn = transparent
+    ? "inline-flex h-8 items-center justify-center rounded-lg border border-white/30 bg-white/10 px-3 text-sm font-medium text-white backdrop-blur transition hover:bg-white/20"
+    : buttonVariants({ variant: "outline", size: "sm" });
+
+  const ghostBtn = transparent
+    ? "hidden h-8 items-center justify-center rounded-lg px-3 text-sm font-medium text-white/85 transition hover:bg-white/10 xl:inline-flex"
+    : `${buttonVariants({ variant: "ghost", size: "sm" })} hidden xl:inline-flex`;
 
   const avatar = (size: string, px: number) =>
     user?.image ? (
@@ -66,9 +93,19 @@ export default function Navbar() {
   return (
     <header className="sticky top-0 z-50 px-3 pt-3 sm:px-4">
       <div className="relative mx-auto max-w-7xl">
-        <div className="glass-strong relative overflow-hidden rounded-2xl">
-          <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-white/50 via-transparent to-transparent dark:from-white/8" />
-          <div className="pointer-events-none absolute -top-12 right-10 h-24 w-1/3 rounded-full bg-primary/15 blur-3xl" />
+        <div
+          className={`relative overflow-hidden rounded-2xl border transition-all duration-300 ${
+            transparent
+              ? "border-white/15 bg-transparent text-white"
+              : "glass-strong border-transparent"
+          }`}
+        >
+          {!transparent && (
+            <>
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-white/50 via-transparent to-transparent dark:from-white/8" />
+              <div className="pointer-events-none absolute -top-12 right-10 h-24 w-1/3 rounded-full bg-primary/15 blur-3xl" />
+            </>
+          )}
 
           <div className="relative flex h-16 items-center justify-between gap-3 px-3 sm:px-5">
             <Logo />
@@ -85,25 +122,29 @@ export default function Navbar() {
               <ThemeToggle />
               {isPending ? null : user ? (
                 <>
-                  <div className="glass flex items-center gap-2 rounded-full py-1 pl-1 pr-3">
+                  <div
+                    className={`flex items-center gap-2 rounded-full py-1 pl-1 pr-3 ${
+                      transparent
+                        ? "border border-white/25 bg-white/10 backdrop-blur"
+                        : "glass"
+                    }`}
+                  >
                     {avatar("h-8 w-8", 32)}
                     <div className="max-w-[110px] leading-tight">
                       <p className="truncate text-xs font-semibold">{user.name}</p>
-                      <span className="text-[9px] font-bold uppercase tracking-wide text-primary">
+                      <span
+                        className={`text-[9px] font-bold uppercase tracking-wide ${
+                          transparent ? "text-[#E9C9A5]" : "text-primary"
+                        }`}
+                      >
                         {role}
                       </span>
                     </div>
                   </div>
-                  <Link
-                    href="/dashboard"
-                    className={buttonVariants({ variant: "outline", size: "sm" })}
-                  >
+                  <Link href="/dashboard" className={outlineBtn}>
                     Dashboard
                   </Link>
-                  <Link
-                    href="/dashboard/profile"
-                    className={`${buttonVariants({ variant: "ghost", size: "sm" })} hidden xl:inline-flex`}
-                  >
+                  <Link href="/dashboard/profile" className={ghostBtn}>
                     Update Profile
                   </Link>
                   <Button size="sm" onClick={handleSignOut}>
@@ -112,10 +153,7 @@ export default function Navbar() {
                 </>
               ) : (
                 <>
-                  <Link
-                    href="/sign-in"
-                    className={buttonVariants({ variant: "outline", size: "sm" })}
-                  >
+                  <Link href="/sign-in" className={outlineBtn}>
                     Sign In
                   </Link>
                   <Link href="/sign-up" className={buttonVariants({ size: "sm" })}>
@@ -128,7 +166,9 @@ export default function Navbar() {
             <div className="flex items-center gap-2 lg:hidden">
               <ThemeToggle />
               <button
-                className="glass flex h-9 w-9 items-center justify-center rounded-lg"
+                className={`flex h-9 w-9 items-center justify-center rounded-lg ${
+                  transparent ? "border border-white/25 bg-white/10 backdrop-blur" : "glass"
+                }`}
                 onClick={() => setOpen(!open)}
                 aria-label="Toggle menu"
                 aria-expanded={open}

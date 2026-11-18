@@ -55,19 +55,33 @@ export default function Hero() {
   };
 
   return (
-    <section className="relative overflow-hidden bg-[#F5F0E8] dark:bg-gradient-to-b dark:from-[#0B1020] dark:via-[#101828] dark:to-[#0B1020]">
-      {/* atmosphere */}
-      <div className="pointer-events-none absolute -right-32 -top-24 h-[28rem] w-[28rem] rounded-full bg-[#FF7849]/25 blur-3xl dark:bg-[#FF7849]/20" />
-      <div className="pointer-events-none absolute -left-32 top-40 h-96 w-96 rounded-full bg-[#17233B]/15 blur-3xl dark:bg-blue-500/15" />
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/60 to-transparent dark:via-white/20" />
+    // -mt-20: navbar er pichone porjonto image jabe
+    <section className="relative -mt-20 min-h-[46rem] overflow-hidden bg-[#101828]">
+      {/* Full-bleed background image */}
+      <Image
+        src="/images/hero-bg.jpg"
+        alt="Students learning with a tutor"
+        fill
+        priority
+        sizes="100vw"
+        className="object-cover object-center"
+      />
 
-      <div className="relative mx-auto max-w-7xl px-4 pb-16 pt-14 lg:pt-20">
-        <div className="grid items-center gap-14 lg:grid-cols-2">
+      {/* Halka navy overlay: image dekha jabe, text o readable */}
+      <div className="absolute inset-0 bg-gradient-to-r from-[#101828]/80 via-[#101828]/40 to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-t from-[#0B1020]/75 via-transparent to-[#0B1020]/35" />
+      <div className="pointer-events-none absolute -right-24 top-24 h-96 w-96 rounded-full bg-[#FF7849]/15 blur-3xl" />
+
+      {/* Orange vertical accent line */}
+      <div className="pointer-events-none absolute bottom-40 left-[52%] hidden h-40 w-px bg-gradient-to-b from-transparent via-[#FF7849] to-[#FF7849] lg:block" />
+
+      <div className="relative mx-auto max-w-7xl px-4 pb-14 pt-36 md:pt-44">
+        <div className="grid items-end gap-10 lg:grid-cols-[1.4fr_1fr]">
           {/* LEFT */}
           <div className="space-y-7">
             <motion.span
               {...enter(0)}
-              className="glass inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-[#F2612E] dark:text-[#E9C9A5]"
+              className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-[#E9C9A5] backdrop-blur-md"
             >
               <span className="h-1.5 w-1.5 rounded-full bg-[#FF7849]" />
               Your learning journey starts here
@@ -75,36 +89,45 @@ export default function Hero() {
 
             <motion.h1
               {...enter(0.1)}
-              className="text-4xl font-extrabold leading-[1.08] tracking-tight text-[#101828] sm:text-5xl md:text-6xl dark:text-white"
+              className="text-4xl font-extrabold uppercase leading-[1.05] tracking-tight text-white drop-shadow-[0_2px_20px_rgba(0,0,0,0.35)] sm:text-5xl md:text-6xl lg:text-7xl"
             >
               Find Your Perfect Tutor.
               <br />
-              <span className="bg-gradient-to-r from-[#FF7849] to-[#F2612E] bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-[#FF8A5C] to-[#F2612E] bg-clip-text text-transparent">
                 Unlock Your Potential.
               </span>
             </motion.h1>
 
             <motion.p
               {...enter(0.2)}
-              className="max-w-xl text-lg leading-relaxed text-[#475467] dark:text-[#A7B1C5]"
+              className="max-w-xl text-base leading-relaxed text-white/85 md:text-lg"
             >
-              Connect with experienced, verified tutors for personalized online and home
-              tuition. Find the right guidance to achieve your academic goals.
+              Connect with experienced, verified tutors for personalized online and
+              home tuition. Find the right guidance to achieve your academic goals.
             </motion.p>
 
-            <motion.div {...enter(0.3)} className="flex flex-col gap-3 sm:flex-row">
-              <motion.div whileHover={reduce ? undefined : { scale: 1.03 }} whileTap={reduce ? undefined : { scale: 0.97 }}>
+            <motion.div {...enter(0.3)} className="flex flex-col gap-3 sm:flex-row sm:items-center">
+              <motion.div
+                whileHover={reduce ? undefined : { scale: 1.03 }}
+                whileTap={reduce ? undefined : { scale: 0.97 }}
+              >
                 <Link
                   href="/tuitions"
-                  className={`${buttonVariants({ size: "lg" })} w-full gap-2 sm:w-auto`}
+                  className="btn-accent inline-flex w-full items-center justify-between gap-4 rounded-full py-2 pl-7 pr-2 text-sm font-bold uppercase tracking-wider sm:w-auto"
                 >
-                  Find a Tutor <ArrowRight className="h-4 w-4" />
+                  Find a Tutor
+                  <span className="flex h-10 w-10 items-center justify-center rounded-full bg-white text-[#F2612E]">
+                    <ArrowRight className="h-4 w-4" />
+                  </span>
                 </Link>
               </motion.div>
-              <motion.div whileHover={reduce ? undefined : { scale: 1.03 }} whileTap={reduce ? undefined : { scale: 0.97 }}>
+              <motion.div
+                whileHover={reduce ? undefined : { scale: 1.03 }}
+                whileTap={reduce ? undefined : { scale: 0.97 }}
+              >
                 <Link
                   href="/sign-up"
-                  className={`${buttonVariants({ size: "lg", variant: "outline" })} w-full sm:w-auto`}
+                  className={`${buttonVariants({ size: "lg", variant: "outline" })} w-full rounded-full border-white/30 bg-white/10 text-white backdrop-blur-md hover:bg-white/20 hover:text-white sm:w-auto`}
                 >
                   Become a Tutor
                 </Link>
@@ -113,7 +136,7 @@ export default function Hero() {
 
             <motion.ul
               {...enter(0.4)}
-              className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-[#475467] dark:text-[#A7B1C5]"
+              className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-white/80"
             >
               {[
                 { icon: ShieldCheck, label: "Verified Tutors" },
@@ -128,63 +151,39 @@ export default function Hero() {
             </motion.ul>
           </div>
 
-          {/* RIGHT */}
-          <motion.div
-            {...(reduce
-              ? {}
-              : {
-                  initial: { opacity: 0, scale: 0.95 },
-                  animate: { opacity: 1, scale: 1 },
-                  transition: { duration: 0.8, delay: 0.2, ease: "easeOut" as const },
-                })}
-            className="relative mx-auto w-full max-w-xl"
-          >
-            <div className="glass-strong rounded-[2rem] p-2">
-              <div className="relative h-80 overflow-hidden rounded-[1.5rem] md:h-[27rem]">
-                <Image
-                  src="/images/hero.jpg"
-                  alt="Student learning with a tutor"
-                  fill
-                  priority
-                  sizes="(min-width: 1024px) 45vw, 100vw"
-                  className="object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#101828]/55 via-transparent to-transparent" />
-                <span className="absolute left-4 top-4 flex items-center gap-1.5 rounded-full bg-white/85 px-3 py-1 text-xs font-semibold text-[#101828] backdrop-blur">
-                  <BadgeCheck className="h-4 w-4 text-[#FF7849]" /> Verified
-                </span>
-              </div>
-            </div>
-
-            {/* tutor profile card */}
+          {/* RIGHT: floating glass cards (desktop only) */}
+          <div className="hidden justify-self-end lg:block">
             <motion.div
               animate={reduce ? undefined : { y: [0, -8, 0] }}
               transition={reduce ? undefined : { duration: 5, repeat: Infinity, ease: "easeInOut" }}
-              className="glass-strong absolute -bottom-6 left-2 flex items-center gap-3 rounded-2xl px-4 py-3 sm:-left-6"
+              className="w-72 space-y-3"
             >
-              <span className="btn-accent flex h-12 w-12 items-center justify-center rounded-full text-lg font-bold">
-                T
-              </span>
-              <div className="leading-tight">
-                <p className="flex items-center gap-1 text-sm font-semibold">
-                  Tanvir Ahmed <BadgeCheck className="h-4 w-4 text-[#FF7849]" />
-                </p>
-                <p className="text-xs text-muted-foreground">HSC Physics · Dhaka</p>
-                <p className="mt-0.5 text-xs font-semibold text-[#F2612E] dark:text-[#E9C9A5]">
-                  ৳3,500 / month
-                </p>
+              <div className="rounded-2xl border border-white/20 bg-white/12 p-4 backdrop-blur-xl">
+                <div className="flex items-center gap-3">
+                  <span className="btn-accent flex h-12 w-12 items-center justify-center rounded-full text-lg font-bold">
+                    T
+                  </span>
+                  <div className="leading-tight text-white">
+                    <p className="flex items-center gap-1 text-sm font-semibold">
+                      Tanvir Ahmed <BadgeCheck className="h-4 w-4 text-[#FF7849]" />
+                    </p>
+                    <p className="text-xs text-white/70">HSC Physics · Dhaka</p>
+                    <p className="mt-0.5 text-xs font-semibold text-[#E9C9A5]">
+                      ৳3,500 / month
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-3 rounded-2xl border border-white/20 bg-white/12 px-4 py-3 backdrop-blur-xl">
+                <Star className="h-5 w-5 fill-[#E9C9A5] text-[#E9C9A5]" />
+                <div className="leading-tight text-white">
+                  <p className="text-lg font-bold">4.9</p>
+                  <p className="text-[11px] text-white/70">Student rating</p>
+                </div>
               </div>
             </motion.div>
-
-            {/* rating card */}
-            <div className="glass-strong absolute -right-2 top-10 hidden items-center gap-2 rounded-2xl px-4 py-3 sm:flex md:-right-6">
-              <Star className="h-5 w-5 fill-[#E9C9A5] text-[#E9C9A5]" />
-              <div className="leading-tight">
-                <p className="text-lg font-bold">4.9</p>
-                <p className="text-[11px] text-muted-foreground">Student rating</p>
-              </div>
-            </div>
-          </motion.div>
+          </div>
         </div>
 
         {/* SEARCH PANEL */}
@@ -197,7 +196,7 @@ export default function Hero() {
                 animate: { opacity: 1, y: 0 },
                 transition: { duration: 0.7, delay: 0.5, ease: "easeOut" as const },
               })}
-          className="glass-strong relative mt-16 rounded-3xl p-5 md:p-7"
+          className="glass-strong relative mt-14 rounded-3xl p-5 md:p-7"
         >
           <h2 className="flex items-center gap-2 text-lg font-bold md:text-xl">
             <GraduationCap className="h-5 w-5 text-[#FF7849]" />

@@ -16,6 +16,7 @@ export interface Tuition {
   approvalStatus: "pending" | "approved" | "rejected";
   isActive: boolean;
   createdAt: string;
+  tutorPlan?: "free" | "pro";
 }
 
 export interface Application {
@@ -33,6 +34,7 @@ export interface Application {
   studentNote: string;
   status: "pending" | "accepted" | "rejected";
   appliedAt: string;
+  studentPlan?: "free" | "pro";
 }
 
 export interface Payment {

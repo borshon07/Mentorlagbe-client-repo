@@ -40,7 +40,6 @@ export default function ApplyForm({ tuitionId }: { tuitionId: string }) {
     defaultValues: { studentPhone: "", preferredSchedule: "", studentNote: "" },
   });
 
-  // Student hole check kori already apply korse kina
   useEffect(() => {
     if (isPending || role !== "student") return;
     let cancelled = false;
@@ -81,7 +80,7 @@ export default function ApplyForm({ tuitionId }: { tuitionId: string }) {
 
   if (!session) {
     return (
-      <div className="rounded-2xl border bg-card p-6 text-center">
+      <div className="glass-strong rounded-2xl p-6 text-center">
         <p className="font-semibold">Sign in to apply</p>
         <p className="mt-1 text-sm text-muted-foreground">
           Only students can apply for a tuition.
@@ -95,7 +94,7 @@ export default function ApplyForm({ tuitionId }: { tuitionId: string }) {
 
   if (role !== "student") {
     return (
-      <div className="rounded-2xl border bg-amber-50 p-6 text-center text-amber-800">
+      <div className="rounded-2xl border border-amber-200 bg-amber-50 p-6 text-center text-amber-800 dark:border-amber-500/30 dark:bg-amber-500/10 dark:text-amber-300">
         <p className="font-semibold">Applications are for students only</p>
         <p className="mt-1 text-sm">
           You are signed in as {role}. Switch to a student account to apply.
@@ -109,7 +108,7 @@ export default function ApplyForm({ tuitionId }: { tuitionId: string }) {
 
   if (!checking && applied) {
     return (
-      <div className="rounded-2xl border bg-emerald-50 p-6 text-center text-emerald-800">
+      <div className="rounded-2xl border border-emerald-200 bg-emerald-50 p-6 text-center text-emerald-800 dark:border-emerald-500/30 dark:bg-emerald-500/10 dark:text-emerald-300">
         <p className="font-semibold">You have already applied</p>
         <p className="mt-1 text-sm">Track the status in your dashboard.</p>
         <Link
@@ -125,7 +124,7 @@ export default function ApplyForm({ tuitionId }: { tuitionId: string }) {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="space-y-4 rounded-2xl border bg-card p-6"
+      className="glass-strong space-y-4 rounded-2xl p-6"
     >
       <h3 className="text-lg font-semibold">Apply for this tuition</h3>
 
@@ -155,7 +154,7 @@ export default function ApplyForm({ tuitionId }: { tuitionId: string }) {
           id="studentNote"
           rows={4}
           placeholder="Tell the tutor what you want to learn"
-          className="w-full rounded-lg border bg-background px-3 py-2 text-sm outline-none focus-visible:ring-2 focus-visible:ring-ring"
+          className="w-full rounded-lg border bg-white/60 px-3 py-2 text-sm outline-none focus-visible:ring-2 focus-visible:ring-ring dark:bg-white/5"
           {...register("studentNote")}
         />
       </div>

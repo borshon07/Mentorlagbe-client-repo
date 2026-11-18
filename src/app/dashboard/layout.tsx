@@ -66,7 +66,7 @@ export default function DashboardLayout({
           image={user.image}
           onToggle={handleToggle}
         />
-        <main className="flex-1 bg-muted/30 p-4 md:p-8">{children}</main>
+        <main className="flex-1 p-4 md:p-8">{children}</main>{" "}
       </div>
     </div>
   );

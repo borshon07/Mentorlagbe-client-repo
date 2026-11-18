@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { MapPin, Clock, Layers, User } from "lucide-react";
+import { MapPin, Clock, Layers, User, BadgeCheck } from "lucide-react";
 import type { Tuition } from "@/types";
 import ApplyForm from "@/components/ui/tuition/ApplyForm";
 import SaveButton from "@/components/ui/tuition/SaveButton";
@@ -38,7 +38,7 @@ export default async function TuitionDetailsPage({
 
       <div className="mt-6 grid gap-8 lg:grid-cols-3">
         <div className="space-y-6 lg:col-span-2">
-          <div className="relative h-72 w-full overflow-hidden rounded-2xl bg-muted md:h-96">
+          <div className="relative h-72 w-full overflow-hidden rounded-3xl border border-white/40 bg-muted shadow-xl md:h-96">
             {tuition.bannerImage ? (
               <Image
                 src={tuition.bannerImage}
@@ -73,7 +73,7 @@ export default async function TuitionDetailsPage({
             </div>
           </div>
 
-          <div className="grid gap-4 rounded-2xl border bg-card p-5 sm:grid-cols-2">
+          <div className="glass grid gap-4 rounded-2xl p-5 sm:grid-cols-2">
             <p className="flex items-center gap-3 text-sm">
               <MapPin className="h-5 w-5 text-primary" />
               {tuition.location || tuition.mode}
@@ -99,13 +99,18 @@ export default async function TuitionDetailsPage({
             </p>
           </div>
 
-          <div className="flex items-center gap-4 rounded-2xl border bg-card p-5">
-            <span className="flex h-12 w-12 items-center justify-center rounded-full bg-primary text-lg font-semibold text-primary-foreground">
+          <div className="glass flex items-center gap-4 rounded-2xl p-5">
+            <span className="btn-accent flex h-12 w-12 items-center justify-center rounded-full text-lg font-semibold">
               {tuition.tutorName.charAt(0).toUpperCase()}
             </span>
             <div>
               <p className="flex items-center gap-2 font-semibold">
                 <User className="h-4 w-4" /> {tuition.tutorName}
+                {tuition.tutorPlan === "pro" && (
+                  <span className="btn-accent flex items-center gap-1 rounded-full px-2 py-0.5 text-[10px] font-semibold">
+                    <BadgeCheck className="h-3 w-3" /> Verified
+                  </span>
+                )}
               </p>
               <p className="text-sm text-muted-foreground">{tuition.tutorEmail}</p>
             </div>
@@ -114,7 +119,7 @@ export default async function TuitionDetailsPage({
 
         <aside className="lg:sticky lg:top-24 lg:self-start">
           {unavailable ? (
-            <div className="rounded-2xl border bg-card p-6 text-center text-muted-foreground">
+            <div className="glass rounded-2xl p-6 text-center text-muted-foreground">
               This tuition is not accepting applications right now.
             </div>
           ) : (
