@@ -1,8 +1,10 @@
 import Link from "next/link";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import { MapPin, Clock, Layers, User } from "lucide-react";
 import type { Tuition } from "@/types";
 import ApplyForm from "@/components/ui/tuition/ApplyForm";
+import SaveButton from "@/components/ui/tuition/SaveButton";
 import { buttonVariants } from "@/components/ui/button";
 
 async function getTuition(id: string): Promise<Tuition | null> {
@@ -36,13 +38,15 @@ export default async function TuitionDetailsPage({
 
       <div className="mt-6 grid gap-8 lg:grid-cols-3">
         <div className="space-y-6 lg:col-span-2">
-          <div className="h-72 w-full overflow-hidden rounded-2xl bg-muted md:h-96">
+          <div className="relative h-72 w-full overflow-hidden rounded-2xl bg-muted md:h-96">
             {tuition.bannerImage ? (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img
+              <Image
                 src={tuition.bannerImage}
                 alt={tuition.title}
-                className="h-full w-full object-cover"
+                fill
+                priority
+                sizes="(min-width: 1024px) 66vw, 100vw"
+                className="object-cover"
               />
             ) : (
               <div className="flex h-full items-center justify-center text-muted-foreground">
@@ -63,7 +67,10 @@ export default async function TuitionDetailsPage({
                 {tuition.mode}
               </span>
             </div>
-            <h1 className="mt-3 text-3xl font-bold leading-tight">{tuition.title}</h1>
+            <div className="mt-3 flex items-start justify-between gap-4">
+              <h1 className="text-3xl font-bold leading-tight">{tuition.title}</h1>
+              <SaveButton tuitionId={tuition._id} />
+            </div>
           </div>
 
           <div className="grid gap-4 rounded-2xl border bg-card p-5 sm:grid-cols-2">

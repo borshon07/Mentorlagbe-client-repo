@@ -21,9 +21,9 @@ export default function DashboardLayout({
 }) {
   const router = useRouter();
   const { data: session, isPending } = useSession();
-  const [open, setOpen] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [desktopCollapsed, setDesktopCollapsed] = useState(false);
 
-  // Session load shesh hoyeche, tarpor-i kebol user nai hole redirect
   useEffect(() => {
     if (!isPending && !session) {
       router.replace("/sign-in");
@@ -41,9 +41,22 @@ export default function DashboardLayout({
   const user = session.user as SessionUser;
   const role = (user.role as "student" | "tutor" | "admin") || "student";
 
+  const handleToggle = () => {
+    if (window.innerWidth >= 1024) {
+      setDesktopCollapsed((v) => !v);
+    } else {
+      setMobileOpen((v) => !v);
+    }
+  };
+
   return (
-    <div className="flex min-h-[calc(100vh-4rem)] w-full">
-      <Sidebar role={role} open={open} onClose={() => setOpen(false)} />
+    <div className="flex min-h-[calc(100vh-5rem)] w-full">
+      <Sidebar
+        role={role}
+        mobileOpen={mobileOpen}
+        desktopCollapsed={desktopCollapsed}
+        onClose={() => setMobileOpen(false)}
+      />
       <div className="flex min-w-0 flex-1 flex-col">
         <Topbar
           name={user.name}
@@ -51,9 +64,9 @@ export default function DashboardLayout({
           role={role}
           plan={user.plan}
           image={user.image}
-          onToggle={() => setOpen((v) => !v)}
+          onToggle={handleToggle}
         />
-        <main className="flex-1 bg-muted/20 p-4 md:p-6">{children}</main>
+        <main className="flex-1 bg-muted/30 p-4 md:p-8">{children}</main>
       </div>
     </div>
   );
