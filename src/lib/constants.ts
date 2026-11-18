@@ -10,6 +10,7 @@ export const SUBJECTS = [
   "Physics",
   "Chemistry",
   "Biology",
+  "Science",
   "English",
   "IELTS",
   "Programming",
