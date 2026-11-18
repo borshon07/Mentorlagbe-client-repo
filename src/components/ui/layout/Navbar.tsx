@@ -34,14 +34,14 @@ export default function Navbar() {
   const linkClass = (href: string) =>
     `rounded-full px-3 py-2 text-sm font-medium transition xl:px-4 ${
       pathname === href
-        ? "bg-primary/15 text-primary ring-1 ring-primary/20"
+        ? "bg-primary/12 text-primary ring-1 ring-primary/25"
         : "text-foreground/70 hover:bg-foreground/5 hover:text-foreground"
     }`;
 
   const mobileLinkClass = (href: string) =>
     `rounded-xl px-3 py-2.5 text-sm font-medium transition ${
       pathname === href
-        ? "bg-primary/15 text-primary"
+        ? "bg-primary/12 text-primary"
         : "text-foreground/70 hover:bg-foreground/5"
     }`;
 
@@ -53,11 +53,11 @@ export default function Navbar() {
         width={px}
         height={px}
         unoptimized
-        className={`${size} shrink-0 rounded-full object-cover ring-2 ring-white/60 dark:ring-white/20`}
+        className={`${size} shrink-0 rounded-full object-cover ring-2 ring-white/70 dark:ring-white/20`}
       />
     ) : (
       <span
-        className={`${size} flex shrink-0 items-center justify-center rounded-full bg-primary text-sm font-semibold text-primary-foreground ring-2 ring-white/60 dark:ring-white/20`}
+        className={`${size} btn-accent flex shrink-0 items-center justify-center rounded-full text-sm font-semibold ring-2 ring-white/70 dark:ring-white/20`}
       >
         {user?.name.charAt(0).toUpperCase()}
       </span>
@@ -66,14 +66,13 @@ export default function Navbar() {
   return (
     <header className="sticky top-0 z-50 px-3 pt-3 sm:px-4">
       <div className="relative mx-auto max-w-7xl">
-        <div className="relative overflow-hidden rounded-2xl border border-white/40 bg-white/55 shadow-[0_8px_32px_rgba(31,38,135,0.15)] backdrop-blur-xl backdrop-saturate-150 dark:border-white/10 dark:bg-white/5 dark:shadow-[0_8px_32px_rgba(0,0,0,0.45)]">
-          <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-white/60 via-white/10 to-transparent dark:from-white/10 dark:via-transparent" />
-          <div className="pointer-events-none absolute -top-10 left-1/4 h-20 w-1/2 rounded-full bg-primary/20 blur-3xl" />
+        <div className="glass-strong relative overflow-hidden rounded-2xl">
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-white/50 via-transparent to-transparent dark:from-white/8" />
+          <div className="pointer-events-none absolute -top-12 right-10 h-24 w-1/3 rounded-full bg-primary/15 blur-3xl" />
 
           <div className="relative flex h-16 items-center justify-between gap-3 px-3 sm:px-5">
             <Logo />
 
-            {/* Desktop links (lg+) */}
             <nav className="hidden items-center gap-1 lg:flex">
               {NAV_LINKS.map((l) => (
                 <Link key={l.href} href={l.href} className={linkClass(l.href)}>
@@ -82,12 +81,11 @@ export default function Navbar() {
               ))}
             </nav>
 
-            {/* Desktop actions (lg+) */}
             <div className="hidden items-center gap-2 lg:flex">
               <ThemeToggle />
               {isPending ? null : user ? (
                 <>
-                  <div className="flex items-center gap-2 rounded-full border border-white/40 bg-white/40 py-1 pl-1 pr-3 backdrop-blur dark:border-white/10 dark:bg-white/5">
+                  <div className="glass flex items-center gap-2 rounded-full py-1 pl-1 pr-3">
                     {avatar("h-8 w-8", 32)}
                     <div className="max-w-[110px] leading-tight">
                       <p className="truncate text-xs font-semibold">{user.name}</p>
@@ -127,11 +125,10 @@ export default function Navbar() {
               )}
             </div>
 
-            {/* Mobile + tablet (below lg) */}
             <div className="flex items-center gap-2 lg:hidden">
               <ThemeToggle />
               <button
-                className="flex h-9 w-9 items-center justify-center rounded-lg border border-white/40 bg-white/40 backdrop-blur dark:border-white/10 dark:bg-white/5"
+                className="glass flex h-9 w-9 items-center justify-center rounded-lg"
                 onClick={() => setOpen(!open)}
                 aria-label="Toggle menu"
                 aria-expanded={open}
@@ -142,7 +139,7 @@ export default function Navbar() {
           </div>
 
           {open && (
-            <div className="relative max-h-[calc(100vh-6rem)] overflow-y-auto border-t border-white/30 px-4 py-4 dark:border-white/10 lg:hidden">
+            <div className="relative max-h-[calc(100vh-6rem)] overflow-y-auto border-t border-border px-4 py-4 lg:hidden">
               <div className="flex flex-col gap-1">
                 {NAV_LINKS.map((l) => (
                   <Link
@@ -157,7 +154,7 @@ export default function Navbar() {
 
                 {user ? (
                   <>
-                    <div className="mt-3 flex items-center gap-3 border-t border-white/30 pt-4 dark:border-white/10">
+                    <div className="mt-3 flex items-center gap-3 border-t border-border pt-4">
                       {avatar("h-10 w-10", 40)}
                       <div className="min-w-0 leading-tight">
                         <p className="truncate text-sm font-medium">{user.name}</p>
@@ -185,7 +182,7 @@ export default function Navbar() {
                     </Button>
                   </>
                 ) : (
-                  <div className="mt-3 grid grid-cols-2 gap-3 border-t border-white/30 pt-4 dark:border-white/10">
+                  <div className="mt-3 grid grid-cols-2 gap-3 border-t border-border pt-4">
                     <Link
                       href="/sign-in"
                       onClick={() => setOpen(false)}
