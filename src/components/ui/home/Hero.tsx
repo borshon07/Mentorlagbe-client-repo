@@ -72,9 +72,6 @@ export default function Hero() {
       <div className="absolute inset-0 bg-gradient-to-t from-[#0B1020]/75 via-transparent to-[#0B1020]/35" />
       <div className="pointer-events-none absolute -right-24 top-24 h-96 w-96 rounded-full bg-[#FF7849]/15 blur-3xl" />
 
-      {/* Orange vertical accent line */}
-      <div className="pointer-events-none absolute bottom-40 left-[52%] hidden h-40 w-px bg-gradient-to-b from-transparent via-[#FF7849] to-[#FF7849] lg:block" />
-
       <div className="relative mx-auto max-w-7xl px-4 pb-14 pt-36 md:pt-44">
         <div className="grid items-end gap-10 lg:grid-cols-[1.4fr_1fr]">
           {/* LEFT */}
