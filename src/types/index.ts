@@ -17,6 +17,8 @@ export interface Tuition {
   isActive: boolean;
   createdAt: string;
   tutorPlan?: "free" | "pro";
+  tutorBio?: string;
+  tutorImage?: string;
 }
 
 export interface Application {

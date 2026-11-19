@@ -8,9 +8,12 @@ import SaveButton from "@/components/ui/tuition/SaveButton";
 import { buttonVariants } from "@/components/ui/button";
 
 async function getTuition(id: string): Promise<Tuition | null> {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/tuitions/${id}`, {
-    cache: "no-store",
-  });
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/api/tuitions/${id}`,
+    {
+      cache: "no-store",
+    },
+  );
   if (!res.ok) return null;
   return res.json();
 }
@@ -25,7 +28,8 @@ export default async function TuitionDetailsPage({
 
   if (!tuition) notFound();
 
-  const unavailable = tuition.approvalStatus !== "approved" || !tuition.isActive;
+  const unavailable =
+    tuition.approvalStatus !== "approved" || !tuition.isActive;
 
   return (
     <main className="mx-auto max-w-7xl px-4 py-10">
@@ -68,7 +72,9 @@ export default async function TuitionDetailsPage({
               </span>
             </div>
             <div className="mt-3 flex items-start justify-between gap-4">
-              <h1 className="text-3xl font-bold leading-tight">{tuition.title}</h1>
+              <h1 className="text-3xl font-bold leading-tight">
+                {tuition.title}
+              </h1>
               <SaveButton tuitionId={tuition._id} />
             </div>
           </div>
@@ -80,7 +86,7 @@ export default async function TuitionDetailsPage({
             </p>
             <p className="flex items-center gap-3 text-sm">
               <Clock className="h-5 w-5 text-primary" />
-              {tuition.daysPerWeek} days per week
+              Schedule: {tuition.daysPerWeek} days per week
             </p>
             <p className="flex items-center gap-3 text-sm">
               <Layers className="h-5 w-5 text-primary" />
@@ -88,7 +94,10 @@ export default async function TuitionDetailsPage({
             </p>
             <p className="text-lg font-bold">
               ${tuition.monthlyFee}
-              <span className="text-sm font-normal text-muted-foreground"> /month</span>
+              <span className="text-sm font-normal text-muted-foreground">
+                {" "}
+                /month
+              </span>
             </p>
           </div>
 
@@ -112,7 +121,9 @@ export default async function TuitionDetailsPage({
                   </span>
                 )}
               </p>
-              <p className="text-sm text-muted-foreground">{tuition.tutorEmail}</p>
+              <p className="text-sm text-muted-foreground">
+                {tuition.tutorEmail}
+              </p>
             </div>
           </div>
         </div>

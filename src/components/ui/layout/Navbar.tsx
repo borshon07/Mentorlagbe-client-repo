@@ -69,8 +69,8 @@ export default function Navbar() {
     : buttonVariants({ variant: "outline", size: "sm" });
 
   const ghostBtn = transparent
-    ? "hidden h-8 items-center justify-center rounded-lg px-3 text-sm font-medium text-white/85 transition hover:bg-white/10 xl:inline-flex"
-    : `${buttonVariants({ variant: "ghost", size: "sm" })} hidden xl:inline-flex`;
+    ? "inline-flex h-8 items-center justify-center rounded-lg px-3 text-sm font-medium text-white/85 transition hover:bg-white/10"
+    : buttonVariants({ variant: "ghost", size: "sm" });
 
   const avatar = (size: string, px: number) =>
     user?.image ? (
@@ -131,7 +131,9 @@ export default function Navbar() {
                   >
                     {avatar("h-8 w-8", 32)}
                     <div className="max-w-[110px] leading-tight">
-                      <p className="truncate text-xs font-semibold">{user.name}</p>
+                      <p className="truncate text-xs font-semibold">
+                        {user.name}
+                      </p>
                       <span
                         className={`text-[9px] font-bold uppercase tracking-wide ${
                           transparent ? "text-[#E9C9A5]" : "text-primary"
@@ -156,7 +158,10 @@ export default function Navbar() {
                   <Link href="/sign-in" className={outlineBtn}>
                     Sign In
                   </Link>
-                  <Link href="/sign-up" className={buttonVariants({ size: "sm" })}>
+                  <Link
+                    href="/sign-up"
+                    className={buttonVariants({ size: "sm" })}
+                  >
                     Sign Up
                   </Link>
                 </>
@@ -167,13 +172,19 @@ export default function Navbar() {
               <ThemeToggle />
               <button
                 className={`flex h-9 w-9 items-center justify-center rounded-lg ${
-                  transparent ? "border border-white/25 bg-white/10 backdrop-blur" : "glass"
+                  transparent
+                    ? "border border-white/25 bg-white/10 backdrop-blur"
+                    : "glass"
                 }`}
                 onClick={() => setOpen(!open)}
                 aria-label="Toggle menu"
                 aria-expanded={open}
               >
-                {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+                {open ? (
+                  <X className="h-5 w-5" />
+                ) : (
+                  <Menu className="h-5 w-5" />
+                )}
               </button>
             </div>
           </div>
@@ -197,7 +208,9 @@ export default function Navbar() {
                     <div className="mt-3 flex items-center gap-3 border-t border-border pt-4">
                       {avatar("h-10 w-10", 40)}
                       <div className="min-w-0 leading-tight">
-                        <p className="truncate text-sm font-medium">{user.name}</p>
+                        <p className="truncate text-sm font-medium">
+                          {user.name}
+                        </p>
                         <span className="text-[10px] font-bold uppercase text-primary">
                           {role}
                         </span>

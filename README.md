@@ -1,36 +1,34 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# MentorLagbe (Client)
 
-## Getting Started
+Smart tuition and mentorship platform connecting students with verified tutors.
 
-First, run the development server:
+**Live Site:** <client-vercel-url>
+**Server Repo:** <server-repo-url>
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Test Accounts
+| Role | Email | Password |
+|---|---|---|
+| Admin | admin@mentorlagbe.com | Admin@12345 |
+| Tutor (Pro) | tanvir@mentorlagbe.com | Tutor@12345 |
+| Student | nusrat@mentorlagbe.com | Student@12345 |
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Stripe test card: 4242 4242 4242 4242, any future date, CVC 123.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Key Features
+- Role-based dashboards (Student, Tutor, Admin)
+- Server-side search, filter and pagination
+- Tutor tuition CRUD with ImgBB image upload
+- Admin approval flow, user role management, transactions
+- Stripe Pro plan checkout (Tutor $15, Student $10)
+- Student apply flow with duplicate prevention
+- Saved tuitions, Verified tutor badge, priority applicants
+- Dark/Light theme, responsive liquid glass UI
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Tech and Packages
+next, react, typescript, tailwindcss, shadcn, better-auth, react-hook-form, zod, sonner, framer-motion, next-themes, lucide-react
 
-## Learn More
+## Environment Variables
+See `.env.example`.
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Run Locally
+npm install && npm run dev
