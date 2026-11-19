@@ -25,6 +25,9 @@ const hind = Hind_Siliguri({
 export const metadata: Metadata = {
   title: "MentorLagbe | Find Your Ideal Tutor",
   description: "Smart tuition and mentorship platform",
+  icons: {
+    icon: "/mentorlagbe.svg",
+  },
 };
 
 export default function RootLayout({
