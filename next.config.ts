@@ -1,5 +1,7 @@
 import type { NextConfig } from "next";
 
+const api = process.env.NEXT_PUBLIC_API_URL;
+
 const nextConfig: NextConfig = {
   images: {
     remotePatterns: [
@@ -9,6 +11,12 @@ const nextConfig: NextConfig = {
     ],
   },
   reactCompiler: true,
+  async rewrites() {
+    return [
+      { source: "/api/auth/:path*", destination: `${api}/api/auth/:path*` },
+      { source: "/api/token", destination: `${api}/api/token` },
+    ];
+  },
 };
 
 export default nextConfig;

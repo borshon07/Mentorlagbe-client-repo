@@ -4,10 +4,10 @@ let cachedToken: string | null = null;
 let tokenExpiry = 0;
 
 async function getToken(): Promise<string | null> {
-  // Token ekhono valid thakle cache theke dao
   if (cachedToken && Date.now() < tokenExpiry) return cachedToken;
 
-  const res = await fetch(`${API_URL}/api/token`, {
+  // Same-origin: next.config.ts er rewrites diye server e jay
+  const res = await fetch(`/api/token`, {
     credentials: "include",
   });
   if (!res.ok) {
@@ -16,7 +16,7 @@ async function getToken(): Promise<string | null> {
   }
   const data = await res.json();
   cachedToken = data.token;
-  // 1 din er token, kintu 50 minute pore refresh kore nebo
+  // Server token 1h, tai 50 minute pore refresh
   tokenExpiry = Date.now() + 50 * 60 * 1000;
   return cachedToken;
 }
@@ -26,7 +26,7 @@ export function clearToken() {
   tokenExpiry = 0;
 }
 
-// Public API (token lage na): tuition list, details
+// Public API (token lage na)
 export async function publicFetch<T>(path: string): Promise<T> {
   const res = await fetch(`${API_URL}${path}`, { cache: "no-store" });
   if (!res.ok) {
@@ -36,7 +36,7 @@ export async function publicFetch<T>(path: string): Promise<T> {
   return res.json();
 }
 
-// Protected API (token lage)
+// Protected API (Bearer token, cookie lage na)
 export async function authFetch<T>(
   path: string,
   options: RequestInit = {}
