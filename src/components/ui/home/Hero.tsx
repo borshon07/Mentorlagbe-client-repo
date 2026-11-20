@@ -56,23 +56,36 @@ export default function Hero() {
 
   return (
     // -mt-20: navbar er pichone porjonto image jabe
-    <section className="relative -mt-20 min-h-[46rem] overflow-hidden bg-[#101828]">
-      {/* Full-bleed background image */}
-      <Image
-        src="/images/hero-bg.jpg"
-        alt="Students learning with a tutor"
-        fill
-        priority
-        sizes="100vw"
-        className="object-cover object-center"
-      />
+    <section className="relative -mt-20 overflow-hidden bg-[#101828] lg:min-h-[46rem]">
+      {/* Desktop: full-bleed background */}
+      <div className="absolute inset-0 hidden lg:block">
+        <Image
+          src="/images/hero-bg.jpg"
+          alt="Students learning with a tutor"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-center"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#101828]/80 via-[#101828]/40 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0B1020]/75 via-transparent to-[#0B1020]/35" />
+        <div className="pointer-events-none absolute -right-24 top-24 h-96 w-96 rounded-full bg-[#FF7849]/15 blur-3xl" />
+      </div>
 
-      {/* Halka navy overlay: image dekha jabe, text o readable */}
-      <div className="absolute inset-0 bg-gradient-to-r from-[#101828]/80 via-[#101828]/40 to-transparent" />
-      <div className="absolute inset-0 bg-gradient-to-t from-[#0B1020]/75 via-transparent to-[#0B1020]/35" />
-      <div className="pointer-events-none absolute -right-24 top-24 h-96 w-96 rounded-full bg-[#FF7849]/15 blur-3xl" />
+      {/* Mobile / tablet: image banner on top */}
+      <div className="relative h-80 w-full sm:h-[26rem] lg:hidden">
+        <Image
+          src="/images/hero-bg.jpg"
+          alt="Students learning with a tutor"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-[65%_25%]"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0B1020]/55 via-transparent to-[#101828]" />
+      </div>
 
-      <div className="relative mx-auto max-w-7xl px-4 pb-14 pt-36 md:pt-44">
+      <div className="relative mx-auto max-w-7xl px-4 pb-14 pt-6 lg:pt-44">
         <div className="grid items-end gap-10 lg:grid-cols-[1.4fr_1fr]">
           {/* LEFT */}
           <div className="space-y-7">
@@ -193,7 +206,7 @@ export default function Hero() {
                 animate: { opacity: 1, y: 0 },
                 transition: { duration: 0.7, delay: 0.5, ease: "easeOut" as const },
               })}
-          className="glass-strong relative mt-14 rounded-3xl p-5 md:p-7"
+          className="glass-strong relative mt-12 rounded-3xl p-5 md:mt-14 md:p-7"
         >
           <h2 className="flex items-center gap-2 text-lg font-bold md:text-xl">
             <GraduationCap className="h-5 w-5 text-[#FF7849]" />

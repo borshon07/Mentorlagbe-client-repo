@@ -97,7 +97,9 @@ export default function Navbar() {
           className={`relative overflow-hidden rounded-2xl border transition-all duration-300 ${
             transparent
               ? "border-white/15 bg-transparent text-white"
-              : "glass-strong border-transparent"
+              : open
+                ? "border-border bg-background shadow-2xl"
+                : "glass-strong border-transparent"
           }`}
         >
           {!transparent && (
