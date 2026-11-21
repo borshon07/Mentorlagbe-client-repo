@@ -50,12 +50,12 @@ export default function Sidebar({
     <>
       {mobileOpen && (
         <div
-          className="fixed inset-x-0 bottom-0 top-24 z-30 bg-black/40 backdrop-blur-sm lg:hidden"
+          className="fixed inset-x-0 bottom-0 top-[4.75rem] z-30 bg-black/40 backdrop-blur-sm lg:hidden"
           onClick={onClose}
         />
       )}
       <aside
-        className={`fixed bottom-0 left-0 top-24 z-40 w-64 shrink-0 overflow-y-auto border-r bg-background/95 backdrop-blur-xl transition-all duration-200 lg:static lg:z-auto lg:bg-background/70 ${
+        className={`fixed bottom-0 left-0 top-[4.75rem] z-40 w-64 shrink-0 overflow-y-auto border-r bg-background/95 backdrop-blur-xl transition-all duration-200 lg:static lg:z-auto lg:bg-background/70 ${
           mobileOpen ? "translate-x-0" : "-translate-x-full"
         } ${
           desktopCollapsed

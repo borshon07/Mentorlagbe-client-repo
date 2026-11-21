@@ -11,9 +11,17 @@ type Props = {
   onToggle: () => void;
 };
 
-export default function Topbar({ name, email, role, plan, image, onToggle }: Props) {
+export default function Topbar({
+  name,
+  email,
+  role,
+  plan,
+  image,
+  onToggle,
+}: Props) {
   return (
-    <header className="sticky top-20 z-20 flex h-14 items-center justify-between border-b bg-background/80 px-4 backdrop-blur-xl">
+    <header className="sticky top-[4.75rem] z-20 flex h-14 items-center justify-between border-b bg-background/80 px-4 backdrop-blur-xl">
+      {" "}
       <button
         onClick={onToggle}
         aria-label="Toggle sidebar"
@@ -21,7 +29,6 @@ export default function Topbar({ name, email, role, plan, image, onToggle }: Pro
       >
         <Menu className="h-5 w-5" />
       </button>
-
       <div className="flex items-center gap-3">
         <div className="hidden text-right leading-tight sm:block">
           <p className="text-sm font-semibold">{name}</p>
