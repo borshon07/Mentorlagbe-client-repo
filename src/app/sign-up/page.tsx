@@ -7,10 +7,11 @@ import { useForm, useWatch } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { toast } from "sonner";
-import { signUp } from "@/lib/auth-client";
+import { signUp, signOut } from "@/lib/auth-client";
 import { clearToken } from "@/lib/api";
 import AuthShell from "@/components/ui/shared/AuthShell";
 import GoogleButton from "@/components/ui/shared/GoogleButton";
+import PasswordInput from "@/components/ui/shared/PasswordInput";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -18,7 +19,7 @@ import { Label } from "@/components/ui/label";
 const schema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
   email: z.string().email("Enter a valid email address"),
-  password: z.string().min(6, "Password must be at least 6 characters"),
+  password: z.string().min(12, "Password must be at least 12 characters"),
   role: z.enum(["student", "tutor"]),
 });
 
@@ -56,9 +57,10 @@ export default function SignUpPage() {
         return;
       }
 
-      toast.success("Account created successfully");
+      toast.success("Account created! Please sign in.");
       clearToken();
-      router.push("/dashboard");
+      await signOut();
+      router.push("/sign-in");
     } catch (err) {
       console.error("Signup error:", err);
       toast.error("Something went wrong. Please try again.");
@@ -110,10 +112,9 @@ export default function SignUpPage() {
 
         <div className="space-y-2">
           <Label htmlFor="password">Password</Label>
-          <Input
+          <PasswordInput
             id="password"
-            type="password"
-            placeholder="At least 6 characters"
+            placeholder="At least 12 characters"
             {...register("password")}
           />
           {errors.password && (

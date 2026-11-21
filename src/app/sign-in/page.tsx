@@ -14,10 +14,11 @@ import GoogleButton from "@/components/ui/shared/GoogleButton";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import PasswordInput from "@/components/ui/shared/PasswordInput";
 
 const schema = z.object({
   email: z.string().email("Enter a valid email address"),
-  password: z.string().min(6, "Password must be at least 6 characters"),
+  password: z.string().min(1, "Enter your password"),
 });
 
 type FormValues = z.infer<typeof schema>;
@@ -71,14 +72,27 @@ export default function SignInPage() {
       <form onSubmit={handleSubmit(onSubmit)} className="mt-6 space-y-4">
         <div className="space-y-2">
           <Label htmlFor="email">Email</Label>
-          <Input id="email" type="email" placeholder="you@example.com" {...register("email")} />
-          {errors.email && <p className="text-sm text-red-500">{errors.email.message}</p>}
+          <Input
+            id="email"
+            type="email"
+            placeholder="you@example.com"
+            {...register("email")}
+          />
+          {errors.email && (
+            <p className="text-sm text-red-500">{errors.email.message}</p>
+          )}
         </div>
 
         <div className="space-y-2">
           <Label htmlFor="password">Password</Label>
-          <Input id="password" type="password" placeholder="Your password" {...register("password")} />
-          {errors.password && <p className="text-sm text-red-500">{errors.password.message}</p>}
+          <PasswordInput
+            id="password"
+            placeholder="Your password"
+            {...register("password")}
+          />
+          {errors.password && (
+            <p className="text-sm text-red-500">{errors.password.message}</p>
+          )}
         </div>
 
         <Button type="submit" className="w-full" disabled={loading}>
@@ -87,13 +101,17 @@ export default function SignInPage() {
       </form>
 
       <div className="my-5 flex items-center gap-3 text-xs text-muted-foreground">
-        <span className="h-px flex-1 bg-border" /> OR <span className="h-px flex-1 bg-border" />
+        <span className="h-px flex-1 bg-border" /> OR{" "}
+        <span className="h-px flex-1 bg-border" />
       </div>
       <GoogleButton label="Continue with Google" />
 
       <p className="mt-6 text-center text-sm text-muted-foreground">
         Don&apos;t have an account?{" "}
-        <Link href="/sign-up" className="font-semibold text-primary hover:underline">
+        <Link
+          href="/sign-up"
+          className="font-semibold text-primary hover:underline"
+        >
           Sign Up
         </Link>
       </p>

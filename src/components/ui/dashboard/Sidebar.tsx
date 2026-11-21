@@ -50,12 +50,12 @@ export default function Sidebar({
     <>
       {mobileOpen && (
         <div
-          className="fixed inset-0 z-30 bg-black/40 backdrop-blur-sm lg:hidden"
+          className="fixed inset-x-0 bottom-0 top-24 z-30 bg-black/40 backdrop-blur-sm lg:hidden"
           onClick={onClose}
         />
       )}
       <aside
-        className={`fixed inset-y-0 left-0 z-40 w-64 shrink-0 border-r bg-background/95 backdrop-blur-xl transition-all duration-200 lg:static lg:z-auto lg:bg-background ${
+        className={`fixed bottom-0 left-0 top-24 z-40 w-64 shrink-0 overflow-y-auto border-r bg-background/95 backdrop-blur-xl transition-all duration-200 lg:static lg:z-auto lg:bg-background/70 ${
           mobileOpen ? "translate-x-0" : "-translate-x-full"
         } ${
           desktopCollapsed
@@ -67,7 +67,11 @@ export default function Sidebar({
           <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
             {role} Menu
           </p>
-          <button className="lg:hidden" onClick={onClose} aria-label="Close menu">
+          <button
+            className="lg:hidden"
+            onClick={onClose}
+            aria-label="Close menu"
+          >
             <X className="h-5 w-5" />
           </button>
         </div>
