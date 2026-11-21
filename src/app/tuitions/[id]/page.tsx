@@ -5,14 +5,13 @@ import { MapPin, Clock, Layers, User, BadgeCheck } from "lucide-react";
 import type { Tuition } from "@/types";
 import ApplyForm from "@/components/ui/tuition/ApplyForm";
 import SaveButton from "@/components/ui/tuition/SaveButton";
+import Reviews from "@/components/ui/tuition/Reviews";
 import { buttonVariants } from "@/components/ui/button";
 
 async function getTuition(id: string): Promise<Tuition | null> {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/api/tuitions/${id}`,
-    {
-      cache: "no-store",
-    },
+    { cache: "no-store" },
   );
   if (!res.ok) return null;
   return res.json();
@@ -41,7 +40,7 @@ export default async function TuitionDetailsPage({
       </Link>
 
       <div className="mt-6 grid gap-8 lg:grid-cols-3">
-        <div className="space-y-6 lg:col-span-2">
+        <div className="min-w-0 space-y-6 lg:col-span-2">
           <div className="relative h-72 w-full overflow-hidden rounded-3xl border border-white/40 bg-muted shadow-xl md:h-96">
             {tuition.bannerImage ? (
               <Image
@@ -108,12 +107,12 @@ export default async function TuitionDetailsPage({
             </p>
           </div>
 
-          <div className="glass flex items-center gap-4 rounded-2xl p-5">
-            <span className="btn-accent flex h-12 w-12 items-center justify-center rounded-full text-lg font-semibold">
+          <div className="glass flex items-start gap-4 rounded-2xl p-5">
+            <span className="btn-accent flex h-12 w-12 shrink-0 items-center justify-center rounded-full text-lg font-semibold">
               {tuition.tutorName.charAt(0).toUpperCase()}
             </span>
-            <div>
-              <p className="flex items-center gap-2 font-semibold">
+            <div className="min-w-0">
+              <p className="flex flex-wrap items-center gap-2 font-semibold">
                 <User className="h-4 w-4" /> {tuition.tutorName}
                 {tuition.tutorPlan === "pro" && (
                   <span className="btn-accent flex items-center gap-1 rounded-full px-2 py-0.5 text-[10px] font-semibold">
@@ -124,8 +123,15 @@ export default async function TuitionDetailsPage({
               <p className="text-sm text-muted-foreground">
                 {tuition.tutorEmail}
               </p>
+              {tuition.tutorBio && (
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                  {tuition.tutorBio}
+                </p>
+              )}
             </div>
           </div>
+
+          <Reviews tuitionId={tuition._id} />
         </div>
 
         <aside className="lg:sticky lg:top-24 lg:self-start">

@@ -37,6 +37,8 @@ export interface Application {
   status: "pending" | "accepted" | "rejected";
   appliedAt: string;
   studentPlan?: "free" | "pro";
+  rating?: number;
+  review?: string;
 }
 
 export interface Payment {
@@ -52,7 +54,17 @@ export interface Payment {
   paymentStatus: string;
   paidAt: string;
 }
-
+export interface ReviewSummary {
+  reviews: {
+    _id: string;
+    studentName: string;
+    rating: number;
+    review: string;
+    reviewedAt: string;
+  }[];
+  average: number;
+  count: number;
+}
 export interface AppUser {
   _id: string;
   name: string;
