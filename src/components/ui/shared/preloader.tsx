@@ -7,7 +7,7 @@ import { GraduationCap } from "lucide-react";
 // Configuration
 const STORAGE_KEY = "mentorlagbe-preloader-seen";
 
-const DURATION = 2800;
+const DURATION = 3500;
 const EXIT_DURATION = 500;
 const DISPLAY_DURATION = DURATION - EXIT_DURATION;
 const BAR_DELAY = 0.2;
@@ -50,8 +50,9 @@ function getSnapshot() {
   }
 }
 
+// true: server HTML e preloader thakbe, tai home page flash korbe na
 function getServerSnapshot() {
-  return false;
+  return true;
 }
 
 function dismiss() {
@@ -85,6 +86,7 @@ export default function Preloader() {
       {show && (
         <motion.div
           key="preloader"
+          data-preloader
           role="status"
           aria-label="Loading MentorLagbe"
           initial={{ opacity: 1 }}
@@ -163,7 +165,7 @@ export default function Preloader() {
                   />
                 ))}
 
-              {/* Network Nodes (transformOrigin soranor por default center e scale hoy) */}
+              {/* Network Nodes */}
               {NODES.map((n, i) => (
                 <motion.g
                   key={`node-${i}`}

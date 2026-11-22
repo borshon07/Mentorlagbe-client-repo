@@ -4,8 +4,8 @@ import { Toaster } from "@/components/ui/sonner";
 import Navbar from "@/components/ui/layout/Navbar";
 import Footer from "@/components/ui/layout/Footer";
 import ThemeProvider from "@/components/ui/layout/themeProvider";
-import "./globals.css";
 import Preloader from "@/components/ui/shared/preloader";
+import "./globals.css";
 
 const jakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -31,6 +31,11 @@ export const metadata: Metadata = {
   },
 };
 
+// Ager dekhe thakle preloader paint er age-i hide kore dey
+const hidePreloaderCss =
+  "html[data-pl-seen] [data-preloader]{display:none!important}";
+const seenScript = `(function(){try{if(sessionStorage.getItem("mentorlagbe-preloader-seen")==="1")document.documentElement.setAttribute("data-pl-seen","")}catch(e){}})()`;
+
 export default function RootLayout({
   children,
 }: {
@@ -42,9 +47,13 @@ export default function RootLayout({
       className={`${jakarta.variable} ${inter.variable} ${hind.variable}`}
       suppressHydrationWarning
     >
+      <head>
+        <style dangerouslySetInnerHTML={{ __html: hidePreloaderCss }} />
+        <script dangerouslySetInnerHTML={{ __html: seenScript }} />
+      </head>
       <body className="flex min-h-screen flex-col font-sans antialiased">
+        <Preloader />
         <ThemeProvider>
-          <Preloader />
           <Navbar />
           <div className="flex-1">{children}</div>
           <Footer />
