@@ -35,7 +35,7 @@ export default function TopSubjects() {
         subtitle="Explore what students learn most."
       />
 
-      <div className="mt-12 grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-6">
+      <div className="mt-12 grid grid-cols-3 gap-3 md:grid-cols-3 lg:grid-cols-6">
         {SUBJECTS.map((s, i) => (
           <Reveal key={s.name} delay={i * 70} className="h-full">
             <Link
