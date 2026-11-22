@@ -16,10 +16,15 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
+
+const nameRegex = /^[A-Za-z]+(?:[ .'-][A-Za-z]+)*$/;
+
+const passwordRegex =
+  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z\d\s]).{8,}$/;
 const schema = z.object({
-  name: z.string().min(2, "Name must be at least 2 characters"),
+  name: z.string().min(2, "Name must be at least 2 characters").regex(nameRegex, "Invalid name format"),
   email: z.string().email("Enter a valid email address"),
-  password: z.string().min(12, "Password must be at least 12 characters"),
+  password: z.string().min(8, "Password must be at least 8 characters").regex(passwordRegex, "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character"),
   role: z.enum(["student", "tutor"]),
 });
 
@@ -114,7 +119,7 @@ export default function SignUpPage() {
           <Label htmlFor="password">Password</Label>
           <PasswordInput
             id="password"
-            placeholder="At least 12 characters"
+            placeholder="At least 8 characters"
             {...register("password")}
           />
           {errors.password && (
