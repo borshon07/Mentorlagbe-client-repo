@@ -113,15 +113,18 @@ export default function PricingSection() {
             key={p.key}
             className="glass liquid-card flex h-full flex-col rounded-2xl p-6"
           >
+            {" "}
+            e p-6 ke p-4 sm:p-6
             <h3 className="text-xl font-semibold">{p.title} Plans</h3>
-
-            <div className="mt-5 grid flex-1 gap-4 sm:grid-cols-2">
-              <div className="rounded-xl border p-4">
+            <div className="mt-5 grid flex-1 grid-cols-2 gap-3">
+              {" "}
+              <div className="rounded-xl border p-3 sm:p-4">
                 <p className="text-sm font-semibold uppercase text-muted-foreground">
                   Free
                 </p>
                 <p className="mt-1 text-2xl font-bold">$0</p>
-                <ul className="mt-3 space-y-2 text-sm">
+                <ul className="mt-3 space-y-2 text-xs sm:text-sm">
+                  {" "}
                   {p.free.map((f) => (
                     <li key={f} className="flex gap-2">
                       <Check className="mt-0.5 h-4 w-4 shrink-0 text-primary" />{" "}
@@ -130,14 +133,14 @@ export default function PricingSection() {
                   ))}
                 </ul>
               </div>
-
-              <div className="rounded-xl border-2 border-primary bg-primary/5 p-4">
+              <div className="rounded-xl border-2 border-primary bg-primary/5 p-3 sm:p-4">
                 {" "}
                 <p className="text-sm font-semibold uppercase text-primary">
                   Pro
                 </p>
                 <p className="mt-1 text-2xl font-bold">${p.price}</p>
-                <ul className="mt-3 space-y-2 text-sm">
+                <ul className="mt-3 space-y-2 text-xs sm:text-sm">
+                  {" "}
                   {p.pro.map((f) => (
                     <li key={f} className="flex gap-2">
                       <Check className="mt-0.5 h-4 w-4 shrink-0 text-primary" />{" "}
@@ -147,7 +150,6 @@ export default function PricingSection() {
                 </ul>
               </div>
             </div>
-
             <div className="mt-6">{renderCta(p.key)}</div>
           </div>
         ))}

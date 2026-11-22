@@ -80,8 +80,8 @@ export default function Footer() {
   return (
     <footer className="mt-16 border-t border-border bg-gradient-to-b from-transparent to-[#101828]/5 dark:to-white/5">
       {" "}
-      <div className="mx-auto grid max-w-7xl gap-10 px-4 py-12 md:grid-cols-3">
-        <div className="space-y-4">
+      <div className="mx-auto grid max-w-7xl grid-cols-2 gap-8 px-4 py-10 md:grid-cols-3 md:gap-10 md:py-12">
+        <div className="col-span-2 space-y-4 md:col-span-1">
           <Logo />
           <p className="max-w-xs text-sm text-muted-foreground">
             Find verified tutors and mentorship batches by subject, class level
@@ -140,8 +140,7 @@ export default function Footer() {
         </div>
       </div>
       <div className="border-t border-border py-4 text-center text-xs text-muted-foreground">
-        {" "}
-        &copy;&copy; 2026 MentorLagbe. All rights reserved.
+        &copy; 2026 MentorLagbe. All rights reserved.
       </div>
     </footer>
   );

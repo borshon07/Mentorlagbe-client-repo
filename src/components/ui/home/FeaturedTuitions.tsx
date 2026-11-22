@@ -7,9 +7,12 @@ import { buttonVariants } from "@/components/ui/button";
 
 async function getLatest(): Promise<Tuition[]> {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/tuitions/latest`, {
-      cache: "no-store",
-    });
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/api/tuitions/latest`,
+      {
+        cache: "no-store",
+      },
+    );
     if (!res.ok) return [];
     return res.json();
   } catch {
@@ -29,7 +32,10 @@ export default async function FeaturedTuitions() {
           title="Featured Tuitions"
           subtitle="Latest approved batches and mentorship offers."
         />
-        <Link href="/tuitions" className={buttonVariants({ variant: "outline" })}>
+        <Link
+          href="/tuitions"
+          className={buttonVariants({ variant: "outline" })}
+        >
           View All
         </Link>
       </div>
@@ -39,11 +45,13 @@ export default async function FeaturedTuitions() {
           No tuitions available right now. Please check back soon.
         </div>
       ) : (
-        <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-10 -mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-4 snap-row sm:mx-0 sm:grid sm:grid-cols-2 sm:overflow-visible sm:px-0 lg:grid-cols-3 lg:gap-6">
           {tuitions.map((t, i) => (
-            <Reveal key={t._id} delay={(i % 3) * 90} className="h-full">
-              <TuitionCard tuition={t} />
-            </Reveal>
+            <div key={t._id} className="w-[82%] shrink-0 snap-start sm:w-auto">
+              <Reveal delay={(i % 3) * 90} className="h-full">
+                <TuitionCard tuition={t} />
+              </Reveal>
+            </div>
           ))}
         </div>
       )}

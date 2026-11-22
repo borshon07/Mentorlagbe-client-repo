@@ -315,6 +315,14 @@
         rgba(255, 255, 255, 0.1) 48%,
         transparent 66%);
   }
+
+  .snap-row {
+    scrollbar-width: none;
+  }
+
+  .snap-row::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

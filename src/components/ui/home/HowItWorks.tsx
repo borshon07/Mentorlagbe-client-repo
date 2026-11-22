@@ -36,7 +36,7 @@ export default function HowItWorks() {
           subtitle="Four simple steps from search to first class."
         />
 
-        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-12 grid grid-cols-2 gap-3 sm:gap-6 lg:grid-cols-4">
           {STEPS.map((s, i) => (
             <Reveal key={s.title} delay={i * 100} className="h-full">
               {/* wrapper: badge ekhane, card er bahire, tai clip hobe na */}

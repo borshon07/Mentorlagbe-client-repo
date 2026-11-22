@@ -31,9 +31,9 @@ export default function Testimonials() {
           subtitle="Real feedback from students, parents and tutors."
         />
 
-        <div className="mt-12 grid gap-6 md:grid-cols-3">
+        <div className="mt-12 -mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-4 snap-row md:mx-0 md:grid md:grid-cols-3 md:overflow-visible md:px-0">
           {ITEMS.map((t, i) => (
-            <Reveal key={t.name} delay={i * 100} className="h-full">
+           <Reveal key={t.name} delay={i * 100} className="h-auto w-[85%] shrink-0 snap-start md:w-auto">
               <div className="glass liquid-card flex h-full flex-col rounded-2xl p-6">
                 <Quote className="h-7 w-7 text-primary/40" />
                 <div className="mt-3 flex gap-1">
