@@ -19,7 +19,6 @@ import {
 import { buttonVariants } from "@/components/ui/button";
 import { SUBJECTS, DISTRICTS } from "@/lib/constants";
 
-// Light mode: solid white field + dark text. Dark mode: translucent field + white text.
 const fieldClass =
   "h-12 w-full appearance-none rounded-xl border border-slate-200 bg-white pl-11 pr-4 text-sm text-slate-900 shadow-sm outline-none transition focus-visible:ring-2 focus-visible:ring-ring dark:border-white/10 dark:bg-white/5 dark:text-white dark:[&>option]:bg-[#101828] dark:[&>option]:text-white";
 
@@ -28,6 +27,30 @@ const TYPE_TO_MODE: Record<string, string> = {
   home: "Offline",
   both: "",
 };
+
+// Theme onujayi image swap: light = hero-light.jpg, dark = hero-bg.jpg
+function ThemedImage({ className }: { className: string }) {
+  return (
+    <>
+      <Image
+        src="/images/hero-light.jpg"
+        alt="Students learning with a tutor"
+        fill
+        priority
+        sizes="100vw"
+        className={`${className} dark:hidden`}
+      />
+      <Image
+        src="/images/hero-bg.jpg"
+        alt="Students learning with a tutor"
+        fill
+        priority
+        sizes="100vw"
+        className={`${className} hidden dark:block`}
+      />
+    </>
+  );
+}
 
 export default function Hero() {
   const router = useRouter();
@@ -57,45 +80,33 @@ export default function Hero() {
 
   return (
     // -mt-20: navbar er pichone porjonto image jabe
-    // Hero always dark thake (light/dark dutei), tai text white-i thakbe
-    <section className="relative -mt-20 overflow-hidden bg-[#101828] lg:min-h-[46rem]">
+    <section className="relative -mt-20 overflow-hidden bg-[#F5F0E8] dark:bg-[#101828] lg:min-h-[46rem]">
       {/* Desktop: full-bleed background */}
       <div className="absolute inset-0 hidden lg:block">
-        <Image
-          src="/images/hero-bg.jpg"
-          alt="Students learning with a tutor"
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover object-center"
-        />
-        {/* Stronger left gradient: image er baked-in text (Trusted Tutors etc.) cover kore */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#101828]/90 via-[#101828]/55 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0B1020]/80 via-transparent to-[#0B1020]/35" />
-        <div className="pointer-events-none absolute -right-24 top-24 h-96 w-96 rounded-full bg-[#FF7849]/15 blur-3xl" />
+        <ThemedImage className="object-cover object-center" />
+        {/* Light overlay */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#F5F0E8]/95 via-[#F5F0E8]/65 to-transparent dark:hidden" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#F5F0E8]/70 via-transparent to-[#F5F0E8]/30 dark:hidden" />
+        {/* Dark overlay */}
+        <div className="absolute inset-0 hidden bg-gradient-to-r from-[#101828]/90 via-[#101828]/55 to-transparent dark:block" />
+        <div className="absolute inset-0 hidden bg-gradient-to-t from-[#0B1020]/80 via-transparent to-[#0B1020]/35 dark:block" />
+        <div className="pointer-events-none absolute -right-24 top-24 h-96 w-96 rounded-full bg-[#FF7849]/20 blur-3xl dark:bg-[#FF7849]/15" />
       </div>
 
       {/* Mobile / tablet: image banner on top */}
       <div className="relative h-80 w-full sm:h-[26rem] lg:hidden">
-        <Image
-          src="/images/hero-bg.jpg"
-          alt="Students learning with a tutor"
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover object-[65%_25%]"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0B1020]/55 via-transparent to-[#101828]" />
+        <ThemedImage className="object-cover object-[65%_25%]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#F5F0E8]/40 via-transparent to-[#F5F0E8] dark:hidden" />
+        <div className="absolute inset-0 hidden bg-gradient-to-b from-[#0B1020]/55 via-transparent to-[#101828] dark:block" />
       </div>
 
-      {/* More top spacing so the badge doesn't touch the navbar */}
       <div className="relative mx-auto max-w-7xl px-4 pb-14 pt-8 lg:pt-52">
         <div className="grid items-end gap-10 lg:grid-cols-[1.4fr_1fr]">
           {/* LEFT */}
           <div className="space-y-7">
             <motion.span
               {...enter(0)}
-              className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-[#E9C9A5] backdrop-blur-md"
+              className="inline-flex items-center gap-2 rounded-full border border-[#101828]/10 bg-white/70 px-4 py-1.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-[#F2612E] backdrop-blur-md dark:border-white/20 dark:bg-white/10 dark:text-[#E9C9A5]"
             >
               <span className="h-1.5 w-1.5 rounded-full bg-[#FF7849]" />
               Your learning journey starts here
@@ -103,7 +114,7 @@ export default function Hero() {
 
             <motion.h1
               {...enter(0.1)}
-              className="text-4xl font-extrabold uppercase leading-[1.05] tracking-tight text-white drop-shadow-[0_2px_20px_rgba(0,0,0,0.35)] sm:text-5xl md:text-6xl lg:text-7xl"
+              className="text-4xl font-extrabold uppercase leading-[1.05] tracking-tight text-[#101828] sm:text-5xl md:text-6xl lg:text-7xl dark:text-white dark:drop-shadow-[0_2px_20px_rgba(0,0,0,0.35)]"
             >
               Find Your Perfect Tutor.
               <br />
@@ -114,7 +125,7 @@ export default function Hero() {
 
             <motion.p
               {...enter(0.2)}
-              className="max-w-xl text-base leading-relaxed text-white/85 md:text-lg"
+              className="max-w-xl text-base leading-relaxed text-[#475467] md:text-lg dark:text-white/85"
             >
               Connect with experienced, verified tutors for personalized online and
               home tuition. Find the right guidance to achieve your academic goals.
@@ -141,7 +152,7 @@ export default function Hero() {
               >
                 <Link
                   href="/sign-up"
-                  className={`${buttonVariants({ size: "lg", variant: "outline" })} w-full rounded-full border-white/30 bg-white/10 text-white backdrop-blur-md hover:bg-white/20 hover:text-white sm:w-auto`}
+                  className={`${buttonVariants({ size: "lg", variant: "outline" })} w-full rounded-full border-[#101828]/20 bg-white/70 text-[#101828] backdrop-blur-md hover:bg-white hover:text-[#101828] sm:w-auto dark:border-white/30 dark:bg-white/10 dark:text-white dark:hover:bg-white/20 dark:hover:text-white`}
                 >
                   Become a Tutor
                 </Link>
@@ -150,7 +161,7 @@ export default function Hero() {
 
             <motion.ul
               {...enter(0.4)}
-              className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-white/80"
+              className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-[#475467] dark:text-white/80"
             >
               {[
                 { icon: ShieldCheck, label: "Verified Tutors" },
@@ -172,36 +183,35 @@ export default function Hero() {
               transition={reduce ? undefined : { duration: 5, repeat: Infinity, ease: "easeInOut" }}
               className="w-72 space-y-3"
             >
-              {/* bg-white/10: Tailwind v3 e valid (bg-white/12 v4 only) */}
-              <div className="rounded-2xl border border-white/20 bg-white/10 p-4 backdrop-blur-xl">
+              <div className="rounded-2xl border border-[#101828]/10 bg-white/75 p-4 backdrop-blur-xl dark:border-white/20 dark:bg-white/10">
                 <div className="flex items-center gap-3">
                   <span className="btn-accent flex h-12 w-12 items-center justify-center rounded-full text-lg font-bold">
                     T
                   </span>
-                  <div className="leading-tight text-white">
+                  <div className="leading-tight text-[#101828] dark:text-white">
                     <p className="flex items-center gap-1 text-sm font-semibold">
                       Tanvir Ahmed <BadgeCheck className="h-4 w-4 text-[#FF7849]" />
                     </p>
-                    <p className="text-xs text-white/70">HSC Physics · Dhaka</p>
-                    <p className="mt-0.5 text-xs font-semibold text-[#E9C9A5]">
+                    <p className="text-xs text-[#667085] dark:text-white/70">HSC Physics · Dhaka</p>
+                    <p className="mt-0.5 text-xs font-semibold text-[#F2612E] dark:text-[#E9C9A5]">
                       ৳3,500 / month
                     </p>
                   </div>
                 </div>
               </div>
 
-              <div className="flex items-center gap-3 rounded-2xl border border-white/20 bg-white/10 px-4 py-3 backdrop-blur-xl">
+              <div className="flex items-center gap-3 rounded-2xl border border-[#101828]/10 bg-white/75 px-4 py-3 backdrop-blur-xl dark:border-white/20 dark:bg-white/10">
                 <Star className="h-5 w-5 fill-[#E9C9A5] text-[#E9C9A5]" />
-                <div className="leading-tight text-white">
+                <div className="leading-tight text-[#101828] dark:text-white">
                   <p className="text-lg font-bold">4.9</p>
-                  <p className="text-[11px] text-white/70">Student rating</p>
+                  <p className="text-[11px] text-[#667085] dark:text-white/70">Student rating</p>
                 </div>
               </div>
             </motion.div>
           </div>
         </div>
 
-        {/* SEARCH PANEL: glass-strong soriye explicit light/dark class */}
+        {/* SEARCH PANEL */}
         <motion.form
           onSubmit={handleSearch}
           {...(reduce
