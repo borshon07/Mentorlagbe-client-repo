@@ -46,8 +46,8 @@ export default function Navbar() {
     if (transparent) {
       return `rounded-full px-3 py-2 text-sm font-semibold transition xl:px-4 ${
         active
-          ? "bg-white/15 text-white ring-1 ring-white/30"
-          : "text-white/80 hover:bg-white/10 hover:text-white"
+          ? "bg-[#101828]/10 text-[#101828] ring-1 ring-[#101828]/20 dark:bg-white/15 dark:text-white dark:ring-white/30"
+          : "text-[#101828]/80 hover:bg-[#101828]/5 hover:text-[#101828] dark:text-white/80 dark:hover:bg-white/10 dark:hover:text-white"
       }`;
     }
     return `rounded-full px-3 py-2 text-sm font-medium transition xl:px-4 ${
@@ -65,12 +65,16 @@ export default function Navbar() {
     }`;
 
   const outlineBtn = transparent
-    ? "inline-flex h-8 items-center justify-center rounded-lg border border-white/30 bg-white/10 px-3 text-sm font-medium text-white backdrop-blur transition hover:bg-white/20"
+    ? "inline-flex h-8 items-center justify-center rounded-lg border border-[#101828]/20 bg-white/60 px-3 text-sm font-medium text-[#101828] backdrop-blur transition hover:bg-white dark:border-white/30 dark:bg-white/10 dark:text-white dark:hover:bg-white/20"
     : buttonVariants({ variant: "outline", size: "sm" });
 
   const ghostBtn = transparent
-    ? "inline-flex h-8 items-center justify-center rounded-lg px-3 text-sm font-medium text-white/85 transition hover:bg-white/10"
+    ? "inline-flex h-8 items-center justify-center rounded-lg px-3 text-sm font-medium text-[#101828]/85 transition hover:bg-[#101828]/5 dark:text-white/85 dark:hover:bg-white/10"
     : buttonVariants({ variant: "ghost", size: "sm" });
+
+  const chipClass = transparent
+    ? "border border-[#101828]/15 bg-white/60 backdrop-blur dark:border-white/25 dark:bg-white/10"
+    : "glass";
 
   const avatar = (size: string, px: number) =>
     user?.image ? (
@@ -96,7 +100,7 @@ export default function Navbar() {
         <div
           className={`relative overflow-hidden rounded-2xl border transition-all duration-300 ${
             transparent
-              ? "border-white/15 bg-transparent text-white"
+              ? "border-[#101828]/10 bg-transparent text-[#101828] dark:border-white/15 dark:text-white"
               : open
                 ? "border-border bg-background shadow-2xl"
                 : "glass-strong border-transparent"
@@ -125,11 +129,7 @@ export default function Navbar() {
               {isPending ? null : user ? (
                 <>
                   <div
-                    className={`flex items-center gap-2 rounded-full py-1 pl-1 pr-3 ${
-                      transparent
-                        ? "border border-white/25 bg-white/10 backdrop-blur"
-                        : "glass"
-                    }`}
+                    className={`flex items-center gap-2 rounded-full py-1 pl-1 pr-3 ${chipClass}`}
                   >
                     {avatar("h-8 w-8", 32)}
                     <div className="max-w-[110px] leading-tight">
@@ -138,7 +138,9 @@ export default function Navbar() {
                       </p>
                       <span
                         className={`text-[9px] font-bold uppercase tracking-wide ${
-                          transparent ? "text-[#E9C9A5]" : "text-primary"
+                          transparent
+                            ? "text-[#F2612E] dark:text-[#E9C9A5]"
+                            : "text-primary"
                         }`}
                       >
                         {role}
@@ -173,11 +175,7 @@ export default function Navbar() {
             <div className="flex items-center gap-2 lg:hidden">
               <ThemeToggle />
               <button
-                className={`flex h-9 w-9 items-center justify-center rounded-lg ${
-                  transparent
-                    ? "border border-white/25 bg-white/10 backdrop-blur"
-                    : "glass"
-                }`}
+                className={`flex h-9 w-9 items-center justify-center rounded-lg ${chipClass}`}
                 onClick={() => setOpen(!open)}
                 aria-label="Toggle menu"
                 aria-expanded={open}
