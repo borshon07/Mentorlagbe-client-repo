@@ -85,8 +85,8 @@ export default function Hero() {
       <div className="absolute inset-0 hidden lg:block">
         <ThemedImage className="object-cover object-center" />
         {/* Light overlay */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#F5F0E8]/95 via-[#F5F0E8]/65 to-transparent dark:hidden" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#F5F0E8]/70 via-transparent to-[#F5F0E8]/30 dark:hidden" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#F5F0E8]/90 via-[#F5F0E8]/35 to-transparent dark:hidden" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#F5F0E8]/50 via-transparent to-transparent dark:hidden" />
         {/* Dark overlay */}
         <div className="absolute inset-0 hidden bg-gradient-to-r from-[#101828]/90 via-[#101828]/55 to-transparent dark:block" />
         <div className="absolute inset-0 hidden bg-gradient-to-t from-[#0B1020]/80 via-transparent to-[#0B1020]/35 dark:block" />
@@ -94,9 +94,9 @@ export default function Hero() {
       </div>
 
       {/* Mobile / tablet: image banner on top */}
-      <div className="relative h-80 w-full sm:h-[26rem] lg:hidden">
-        <ThemedImage className="object-cover object-[65%_25%]" />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#F5F0E8]/40 via-transparent to-[#F5F0E8] dark:hidden" />
+      <div className="relative h-80 w-full sm:h-[28rem] lg:hidden">
+        <ThemedImage className="object-cover object-[70%_30%]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#F5F0E8] dark:hidden" />
         <div className="absolute inset-0 hidden bg-gradient-to-b from-[#0B1020]/55 via-transparent to-[#101828] dark:block" />
       </div>
 
@@ -127,11 +127,15 @@ export default function Hero() {
               {...enter(0.2)}
               className="max-w-xl text-base leading-relaxed text-[#475467] md:text-lg dark:text-white/85"
             >
-              Connect with experienced, verified tutors for personalized online and
-              home tuition. Find the right guidance to achieve your academic goals.
+              Connect with experienced, verified tutors for personalized online
+              and home tuition. Find the right guidance to achieve your academic
+              goals.
             </motion.p>
 
-            <motion.div {...enter(0.3)} className="flex flex-col gap-3 sm:flex-row sm:items-center">
+            <motion.div
+              {...enter(0.3)}
+              className="flex flex-col gap-3 sm:flex-row sm:items-center"
+            >
               <motion.div
                 whileHover={reduce ? undefined : { scale: 1.03 }}
                 whileTap={reduce ? undefined : { scale: 0.97 }}
@@ -180,7 +184,11 @@ export default function Hero() {
           <div className="hidden justify-self-end lg:block">
             <motion.div
               animate={reduce ? undefined : { y: [0, -8, 0] }}
-              transition={reduce ? undefined : { duration: 5, repeat: Infinity, ease: "easeInOut" }}
+              transition={
+                reduce
+                  ? undefined
+                  : { duration: 5, repeat: Infinity, ease: "easeInOut" }
+              }
               className="w-72 space-y-3"
             >
               <div className="rounded-2xl border border-[#101828]/10 bg-white/75 p-4 backdrop-blur-xl dark:border-white/20 dark:bg-white/10">
@@ -190,9 +198,12 @@ export default function Hero() {
                   </span>
                   <div className="leading-tight text-[#101828] dark:text-white">
                     <p className="flex items-center gap-1 text-sm font-semibold">
-                      Tanvir Ahmed <BadgeCheck className="h-4 w-4 text-[#FF7849]" />
+                      Tanvir Ahmed{" "}
+                      <BadgeCheck className="h-4 w-4 text-[#FF7849]" />
                     </p>
-                    <p className="text-xs text-[#667085] dark:text-white/70">HSC Physics · Dhaka</p>
+                    <p className="text-xs text-[#667085] dark:text-white/70">
+                      HSC Physics · Dhaka
+                    </p>
                     <p className="mt-0.5 text-xs font-semibold text-[#F2612E] dark:text-[#E9C9A5]">
                       ৳3,500 / month
                     </p>
@@ -204,7 +215,9 @@ export default function Hero() {
                 <Star className="h-5 w-5 fill-[#E9C9A5] text-[#E9C9A5]" />
                 <div className="leading-tight text-[#101828] dark:text-white">
                   <p className="text-lg font-bold">4.9</p>
-                  <p className="text-[11px] text-[#667085] dark:text-white/70">Student rating</p>
+                  <p className="text-[11px] text-[#667085] dark:text-white/70">
+                    Student rating
+                  </p>
                 </div>
               </div>
             </motion.div>
@@ -219,7 +232,11 @@ export default function Hero() {
             : {
                 initial: { opacity: 0, y: 30 },
                 animate: { opacity: 1, y: 0 },
-                transition: { duration: 0.7, delay: 0.5, ease: "easeOut" as const },
+                transition: {
+                  duration: 0.7,
+                  delay: 0.5,
+                  ease: "easeOut" as const,
+                },
               })}
           className="relative mt-12 rounded-3xl border border-white/40 bg-white/90 p-5 text-slate-900 shadow-2xl shadow-black/25 backdrop-blur-xl dark:border-white/10 dark:bg-[#101828]/70 dark:text-white md:mt-14 md:p-7"
         >
@@ -230,7 +247,9 @@ export default function Hero() {
 
           <div className="mt-5 grid gap-3 md:grid-cols-2 lg:grid-cols-[1fr_1fr_1fr_auto]">
             <div className="relative">
-              <label htmlFor="hero-subject" className="sr-only">Subject</label>
+              <label htmlFor="hero-subject" className="sr-only">
+                Subject
+              </label>
               <BookOpen className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-[#FF7849]" />
               <select
                 id="hero-subject"
@@ -240,13 +259,17 @@ export default function Hero() {
               >
                 <option value="">What do you want to learn?</option>
                 {SUBJECTS.map((s) => (
-                  <option key={s} value={s}>{s}</option>
+                  <option key={s} value={s}>
+                    {s}
+                  </option>
                 ))}
               </select>
             </div>
 
             <div className="relative">
-              <label htmlFor="hero-district" className="sr-only">District</label>
+              <label htmlFor="hero-district" className="sr-only">
+                District
+              </label>
               <MapPin className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-[#FF7849]" />
               <select
                 id="hero-district"
@@ -256,13 +279,17 @@ export default function Hero() {
               >
                 <option value="">Select your district</option>
                 {DISTRICTS.map((d) => (
-                  <option key={d} value={d}>{d}</option>
+                  <option key={d} value={d}>
+                    {d}
+                  </option>
                 ))}
               </select>
             </div>
 
             <div className="relative">
-              <label htmlFor="hero-type" className="sr-only">Tuition type</label>
+              <label htmlFor="hero-type" className="sr-only">
+                Tuition type
+              </label>
               <Wifi className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-[#FF7849]" />
               <select
                 id="hero-type"
@@ -282,7 +309,8 @@ export default function Hero() {
               whileTap={reduce ? undefined : { scale: 0.97 }}
               className="btn-accent flex h-12 items-center justify-center gap-2 rounded-xl px-7 text-sm font-semibold md:col-span-2 lg:col-span-1"
             >
-              <Search className="h-4 w-4" /> Search Tutors <ArrowRight className="h-4 w-4" />
+              <Search className="h-4 w-4" /> Search Tutors{" "}
+              <ArrowRight className="h-4 w-4" />
             </motion.button>
           </div>
         </motion.form>

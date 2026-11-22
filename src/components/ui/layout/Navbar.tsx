@@ -44,16 +44,16 @@ export default function Navbar() {
   const linkClass = (href: string) => {
     const active = pathname === href;
     if (transparent) {
-      return `rounded-full px-3 py-2 text-sm font-semibold transition xl:px-4 ${
+      return `liquid-item rounded-full px-3 py-2 text-sm font-semibold xl:px-4 ${
         active
           ? "bg-[#101828]/10 text-[#101828] ring-1 ring-[#101828]/20 dark:bg-white/15 dark:text-white dark:ring-white/30"
-          : "text-[#101828]/80 hover:bg-[#101828]/5 hover:text-[#101828] dark:text-white/80 dark:hover:bg-white/10 dark:hover:text-white"
+          : "text-[#101828]/80 hover:text-[#101828] dark:text-white/80 dark:hover:text-white"
       }`;
     }
-    return `rounded-full px-3 py-2 text-sm font-medium transition xl:px-4 ${
+    return `liquid-item rounded-full px-3 py-2 text-sm font-medium xl:px-4 ${
       active
         ? "bg-primary/12 text-primary ring-1 ring-primary/25"
-        : "text-foreground/70 hover:bg-foreground/5 hover:text-foreground"
+        : "text-foreground/70 hover:text-foreground"
     }`;
   };
 
@@ -65,16 +65,16 @@ export default function Navbar() {
     }`;
 
   const outlineBtn = transparent
-    ? "inline-flex h-8 items-center justify-center rounded-lg border border-[#101828]/20 bg-white/60 px-3 text-sm font-medium text-[#101828] backdrop-blur transition hover:bg-white dark:border-white/30 dark:bg-white/10 dark:text-white dark:hover:bg-white/20"
-    : buttonVariants({ variant: "outline", size: "sm" });
+    ? "liquid-item inline-flex h-8 items-center justify-center rounded-lg border border-[#101828]/20 bg-white/60 px-3 text-sm font-medium text-[#101828] backdrop-blur dark:border-white/30 dark:bg-white/10 dark:text-white"
+    : `liquid-item ${buttonVariants({ variant: "outline", size: "sm" })}`;
 
   const ghostBtn = transparent
-    ? "inline-flex h-8 items-center justify-center rounded-lg px-3 text-sm font-medium text-[#101828]/85 transition hover:bg-[#101828]/5 dark:text-white/85 dark:hover:bg-white/10"
-    : buttonVariants({ variant: "ghost", size: "sm" });
+    ? "liquid-item inline-flex h-8 items-center justify-center rounded-lg px-3 text-sm font-medium text-[#101828]/85 dark:text-white/85"
+    : `liquid-item ${buttonVariants({ variant: "ghost", size: "sm" })}`;
 
   const chipClass = transparent
-    ? "border border-[#101828]/15 bg-white/60 backdrop-blur dark:border-white/25 dark:bg-white/10"
-    : "glass";
+    ? "liquid-item border border-[#101828]/15 bg-white/60 backdrop-blur dark:border-white/25 dark:bg-white/10"
+    : "liquid-item glass";
 
   const avatar = (size: string, px: number) =>
     user?.image ? (
@@ -103,7 +103,7 @@ export default function Navbar() {
               ? "border-[#101828]/10 bg-transparent text-[#101828] dark:border-white/15 dark:text-white"
               : open
                 ? "border-border bg-background shadow-2xl"
-                : "glass-strong border-transparent"
+                : "liquid-bar border-transparent"
           }`}
         >
           {!transparent && (
