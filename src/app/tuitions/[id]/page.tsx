@@ -7,6 +7,7 @@ import ApplyForm from "@/components/ui/tuition/ApplyForm";
 import SaveButton from "@/components/ui/tuition/SaveButton";
 import Reviews from "@/components/ui/tuition/Reviews";
 import { buttonVariants } from "@/components/ui/button";
+import RelatedTuitions from "@/components/ui/tuition/RelatedTuitions";
 
 async function getTuition(id: string): Promise<Tuition | null> {
   const res = await fetch(
@@ -60,9 +61,12 @@ export default async function TuitionDetailsPage({
 
           <div>
             <div className="flex flex-wrap gap-2">
-              <span className="rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">
+              <Link
+                href={`/tuitions?subject=${encodeURIComponent(tuition.subject)}`}
+                className="rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary transition hover:bg-primary/20"
+              >
                 {tuition.subject}
-              </span>
+              </Link>
               <span className="rounded-full bg-muted px-3 py-1 text-xs font-medium">
                 {tuition.classLevel}
               </span>
@@ -144,6 +148,7 @@ export default async function TuitionDetailsPage({
           )}
         </aside>
       </div>
+      <RelatedTuitions subject={tuition.subject} currentId={tuition._id} />
     </main>
   );
 }

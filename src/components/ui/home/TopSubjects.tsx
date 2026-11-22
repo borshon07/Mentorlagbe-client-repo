@@ -1,5 +1,12 @@
 import Link from "next/link";
-import { Calculator, Atom, Code2, Languages, FlaskConical, Laptop } from "lucide-react";
+import {
+  Calculator,
+  Atom,
+  Code2,
+  Languages,
+  FlaskConical,
+  Laptop,
+} from "lucide-react";
 import Reveal from "@/components/ui/shared/Reveal";
 import SectionHeading from "@/components/ui/shared/SectionHeading";
 
@@ -32,9 +39,10 @@ export default function TopSubjects() {
         {SUBJECTS.map((s, i) => (
           <Reveal key={s.name} delay={i * 70} className="h-full">
             <Link
-              href="/tuitions"
+              href={`/tuitions?subject=${encodeURIComponent(s.name)}`}
               className="glass group flex h-full flex-col items-center gap-3 rounded-2xl p-6 text-center transition hover:-translate-y-1 hover:border-primary/40"
             >
+              
               <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary transition group-hover:bg-primary group-hover:text-white">
                 <s.icon className="h-6 w-6" />
               </span>
@@ -50,7 +58,9 @@ export default function TopSubjects() {
           <div className="relative grid grid-cols-2 gap-6 lg:grid-cols-4">
             {STATS.map((s) => (
               <div key={s.label} className="text-center">
-                <p className="text-3xl font-extrabold text-[#e9c9a5] md:text-4xl">{s.value}</p>
+                <p className="text-3xl font-extrabold text-[#e9c9a5] md:text-4xl">
+                  {s.value}
+                </p>
                 <p className="mt-1 text-sm text-white/70">{s.label}</p>
               </div>
             ))}
