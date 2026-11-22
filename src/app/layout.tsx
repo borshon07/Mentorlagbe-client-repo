@@ -33,7 +33,7 @@ export const metadata: Metadata = {
 
 // Ager dekhe thakle preloader paint er age-i hide kore dey
 const hidePreloaderCss =
-  "html[data-pl-seen] [data-preloader]{display:none!important}";
+  'html[data-pl-seen] [data-preloader="full"]{display:none!important}html:not([data-pl-seen]) [data-preloader="icon"]{display:none!important}';
 const seenScript = `(function(){try{if(sessionStorage.getItem("mentorlagbe-preloader-seen")==="1")document.documentElement.setAttribute("data-pl-seen","")}catch(e){}})()`;
 
 export default function RootLayout({
