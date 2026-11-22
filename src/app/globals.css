@@ -116,18 +116,21 @@
   }
 }
 
-.bg-card {
-  backdrop-filter: blur(18px) saturate(170%);
-  -webkit-backdrop-filter: blur(18px) saturate(170%);
-  box-shadow:
-    0 1px 0 rgba(255, 255, 255, 0.6) inset,
-    0 10px 28px -14px rgba(16, 24, 40, 0.18);
-}
+/* bg-card glass: components layer e, jate utilities (liquid-card hover) override korte pare */
+@layer components {
+  .bg-card {
+    backdrop-filter: blur(18px) saturate(170%);
+    -webkit-backdrop-filter: blur(18px) saturate(170%);
+    box-shadow:
+      0 1px 0 rgba(255, 255, 255, 0.6) inset,
+      0 10px 28px -14px rgba(16, 24, 40, 0.18);
+  }
 
-.dark .bg-card {
-  box-shadow:
-    0 1px 0 rgba(255, 255, 255, 0.07) inset,
-    0 14px 30px -14px rgba(0, 0, 0, 0.6);
+  .dark .bg-card {
+    box-shadow:
+      0 1px 0 rgba(255, 255, 255, 0.07) inset,
+      0 14px 30px -14px rgba(0, 0, 0, 0.6);
+  }
 }
 
 /* ---------- Liquid glass utilities ---------- */
@@ -168,10 +171,23 @@
       0 24px 56px -20px rgba(0, 0, 0, 0.7);
   }
 
-  /* Warm orange CTA with subtle shine */
+  /* Warm orange CTA */
+  .btn-accent {
+    background-image: linear-gradient(135deg, #ff8a5c 0%, #f2612e 100%);
+    color: #fff;
+    box-shadow:
+      0 1px 0 rgba(255, 255, 255, 0.35) inset,
+      0 8px 20px -8px rgba(242, 97, 46, 0.65);
+  }
+
+  /* Orange button hover: background orange-i thake, shudhu brightness ar lift */
   .btn-accent.liquid-item:hover {
     background-image: linear-gradient(135deg, #ff8a5c 0%, #f2612e 100%);
     filter: brightness(1.06);
+    transform: translateY(-1px);
+    box-shadow:
+      0 1px 0 rgba(255, 255, 255, 0.4) inset,
+      0 12px 24px -8px rgba(242, 97, 46, 0.75);
   }
 
   .text-gradient {
@@ -185,11 +201,15 @@
     background-image: linear-gradient(135deg, #f8fafc 0%, #e9c9a5 55%, #ff7849 100%);
   }
 
-  /* Liquid glass nav items: hover e glass lens + shine */
+  /* Liquid glass items: hover e glass lens + shine */
   .liquid-item {
     position: relative;
     overflow: hidden;
-    transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+    transition:
+      transform 0.25s ease,
+      box-shadow 0.25s ease,
+      background-color 0.25s ease,
+      filter 0.25s ease;
   }
 
   .liquid-item::before {
@@ -206,8 +226,9 @@
     pointer-events: none;
   }
 
-  .liquid-item:hover {
-    background: rgba(255, 255, 255, 0.45);
+  /* Orange (btn-accent) button e ei hover lage na */
+  .liquid-item:not(.btn-accent):hover {
+    background-color: rgba(255, 255, 255, 0.45);
     backdrop-filter: blur(14px) saturate(180%);
     -webkit-backdrop-filter: blur(14px) saturate(180%);
     box-shadow:
@@ -220,8 +241,8 @@
     transform: translateX(120%);
   }
 
-  .dark .liquid-item:hover {
-    background: rgba(255, 255, 255, 0.1);
+  .dark .liquid-item:not(.btn-accent):hover {
+    background-color: rgba(255, 255, 255, 0.1);
     box-shadow:
       0 1px 0 rgba(255, 255, 255, 0.18) inset,
       0 10px 24px -10px rgba(0, 0, 0, 0.6);
@@ -234,7 +255,7 @@
         transparent 70%);
   }
 
-  /* Navbar bar e liquid glass: bevel, highlight, depth */
+  /* Navbar bar: liquid glass bevel, highlight, depth */
   .liquid-bar {
     background: rgba(255, 255, 255, 0.5);
     border: 1px solid rgba(255, 255, 255, 0.7);
@@ -255,10 +276,13 @@
       0 20px 44px -18px rgba(0, 0, 0, 0.7);
   }
 
+  /* Cards: halka lift + shine */
   .liquid-card {
     position: relative;
     overflow: hidden;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition:
+      transform 0.3s ease,
+      box-shadow 0.3s ease;
   }
 
   .liquid-card::after {
