@@ -4,15 +4,15 @@ MentorLagbe is a smart tuition and mentorship platform. Students find verified t
 
 - **Live Site:** https://mentorlagbe-client-rosy.vercel.app
 - **Server API:** https://mentorlagbe-server-nine.vercel.app
-- **Server Repository:** <server-repo-url>
+- **Server Repository:** https://github.com/borshon07/Mentorlagbe-server-repo
 
 ## Test Accounts
 
-| Role | Email | Password |
-|---|---|---|
-| Admin | admin@mentorlagbe.com | Admin@12345 |
-| Tutor (Pro) | tanvir@mentorlagbe.com | Tutor@12345 |
-| Student | <student-email> | <student-password> |
+| Role        | Email                  | Password     |
+| ----------- | ---------------------- | ------------ |
+| Admin       | admin@mentorlagbe.com  | Admin@12345  |
+| Tutor (Pro) | tanvir@mentorlagbe.com | Tutor@12345  |
+| Student     | student12@gmail.com    | student12@12 |
 
 **Stripe test card:** `4242 4242 4242 4242`, any future expiry, CVC `123`.
 
@@ -41,10 +41,10 @@ next, react, typescript, tailwindcss, shadcn, better-auth, react-hook-form, zod,
 
 Copy `.env.example` to `.env.local` and fill in the values.
 
-| Variable | Purpose |
-|---|---|
-| NEXT_PUBLIC_API_URL | Server base URL |
-| NEXT_PUBLIC_IMGBB_API_KEY | ImgBB upload key |
+| Variable                           | Purpose                |
+| ---------------------------------- | ---------------------- |
+| NEXT_PUBLIC_API_URL                | Server base URL        |
+| NEXT_PUBLIC_IMGBB_API_KEY          | ImgBB upload key       |
 | NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY | Stripe publishable key |
 
 ## Run Locally
