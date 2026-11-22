@@ -1,16 +1,27 @@
 
 "use client";
 
-import { useEffect, useState } from "react";
+import {
+  useEffect,
+  useSyncExternalStore,
+} from "react";
+
 import {
   AnimatePresence,
   motion,
   useReducedMotion,
 } from "framer-motion";
+
 import { GraduationCap } from "lucide-react";
 
+// Configuration
 const STORAGE_KEY = "mentorlagbe-preloader-seen";
-const DURATION = 10000;
+
+const DURATION = 3500;
+const EXIT_DURATION = 500;
+const DISPLAY_DURATION = DURATION - EXIT_DURATION;
+
+const ACCENT = "#FF7849";
 
 const CENTER = { x: 120, y: 120 };
 
@@ -23,42 +34,73 @@ const NODES = [
   { x: 50.7, y: 80, r: 4 },
 ];
 
-const RING = NODES.map((n) => `${n.x},${n.y}`).join(" ");
-const ACCENT = "#FF7849";
+const RING = NODES.map(
+  (n) => `${n.x},${n.y}`
+).join(" ");
 
 const BRAND_NAME = Array.from("MentorLagbe");
 
+// External store for session-based visibility
+const listeners = new Set<() => void>();
+
+function subscribe(callback: () => void) {
+  listeners.add(callback);
+
+  return () => {
+    listeners.delete(callback);
+  };
+}
+
+function getSnapshot() {
+  try {
+    return (
+      typeof window !== "undefined" &&
+      sessionStorage.getItem(STORAGE_KEY) !== "1"
+    );
+  } catch {
+    return true;
+  }
+}
+
+function getServerSnapshot() {
+  return false;
+}
+
+function notifyListeners() {
+  listeners.forEach((callback) => callback());
+}
+
 export default function Preloader() {
   const reduce = useReducedMotion();
-  const [show, setShow] = useState(true);
+
+  const show = useSyncExternalStore(
+    subscribe,
+    getSnapshot,
+    getServerSnapshot
+  );
 
   useEffect(() => {
-    let seen = false;
+    if (!show) return;
 
-    try {
-      seen = sessionStorage.getItem(STORAGE_KEY) === "1";
-    } catch {}
+    const previousOverflow =
+      document.body.style.overflow;
 
-    if (!seen) {
-      document.body.style.overflow = "hidden";
-    }
-
-    const delay = seen ? 0 : reduce ? 500 : DURATION;
+    document.body.style.overflow = "hidden";
 
     const timer = setTimeout(() => {
-      setShow(false);
-      document.body.style.overflow = "";
-
       try {
         sessionStorage.setItem(STORAGE_KEY, "1");
       } catch {}
-    }, delay);
+
+      notifyListeners();
+    }, reduce ? 500 : DISPLAY_DURATION);
 
     return () => {
       clearTimeout(timer);
-      document.body.style.overflow = "";
+      document.body.style.overflow =
+        previousOverflow;
     };
-  }, [reduce]);
+  }, [show, reduce]);
 
   return (
     <AnimatePresence>
@@ -68,9 +110,12 @@ export default function Preloader() {
           role="status"
           aria-label="Loading MentorLagbe"
           initial={{ opacity: 1 }}
-          exit={{ opacity: 0, scale: 1.03 }}
+          exit={{
+            opacity: 0,
+            scale: 1.03,
+          }}
           transition={{
-            duration: 0.5,
+            duration: EXIT_DURATION / 1000,
             ease: [0.4, 0, 0.2, 1],
           }}
           className="fixed inset-0 z-[100] flex flex-col items-center justify-center overflow-hidden bg-[#101828] px-6"
@@ -94,12 +139,20 @@ export default function Preloader() {
                 strokeWidth={1}
                 strokeLinejoin="round"
                 initial={
-                  reduce ? false : { pathLength: 0, opacity: 0 }
+                  reduce
+                    ? false
+                    : {
+                        pathLength: 0,
+                        opacity: 0,
+                      }
                 }
-                animate={{ pathLength: 1, opacity: 1 }}
+                animate={{
+                  pathLength: 1,
+                  opacity: 1,
+                }}
                 transition={{
-                  duration: 0.7,
-                  delay: 0.55,
+                  duration: 0.6,
+                  delay: 0.15,
                   ease: "easeInOut",
                 }}
               />
@@ -117,12 +170,20 @@ export default function Preloader() {
                   strokeWidth={1.25}
                   strokeLinecap="round"
                   initial={
-                    reduce ? false : { pathLength: 0, opacity: 0 }
+                    reduce
+                      ? false
+                      : {
+                          pathLength: 0,
+                          opacity: 0,
+                        }
                   }
-                  animate={{ pathLength: 1, opacity: 1 }}
+                  animate={{
+                    pathLength: 1,
+                    opacity: 1,
+                  }}
                   transition={{
-                    duration: 0.5,
-                    delay: 0.1 + i * 0.07,
+                    duration: 0.4,
+                    delay: 0.1 + i * 0.05,
                     ease: "easeOut",
                   }}
                 />
@@ -146,10 +207,10 @@ export default function Preloader() {
                       opacity: [0, 1, 0],
                     }}
                     transition={{
-                      duration: 1,
-                      delay: 0.7 + i * 0.12,
+                      duration: 0.9,
+                      delay: 0.5 + i * 0.1,
                       repeat: Infinity,
-                      repeatDelay: 0.25,
+                      repeatDelay: 0.2,
                       ease: "easeInOut",
                     }}
                   />
@@ -160,14 +221,22 @@ export default function Preloader() {
                 <motion.g
                   key={`node-${i}`}
                   initial={
-                    reduce ? false : { scale: 0, opacity: 0 }
+                    reduce
+                      ? false
+                      : {
+                          scale: 0,
+                          opacity: 0,
+                        }
                   }
-                  animate={{ scale: 1, opacity: 1 }}
+                  animate={{
+                    scale: 1,
+                    opacity: 1,
+                  }}
                   transition={{
                     type: "spring",
                     stiffness: 260,
                     damping: 16,
-                    delay: 0.35 + i * 0.07,
+                    delay: 0.2 + i * 0.05,
                   }}
                   style={{
                     transformOrigin: `${n.x}px ${n.y}px`,
@@ -180,6 +249,7 @@ export default function Preloader() {
                     fill={ACCENT}
                     fillOpacity={0.12}
                   />
+
                   <circle
                     cx={n.x}
                     cy={n.y}
@@ -194,13 +264,22 @@ export default function Preloader() {
             <div className="absolute inset-0 flex items-center justify-center">
               <motion.div
                 initial={
-                  reduce ? false : { scale: 0.6, opacity: 0 }
+                  reduce
+                    ? false
+                    : {
+                        scale: 0.6,
+                        opacity: 0,
+                      }
                 }
-                animate={{ scale: 1, opacity: 1 }}
+                animate={{
+                  scale: 1,
+                  opacity: 1,
+                }}
                 transition={{
                   type: "spring",
                   stiffness: 220,
                   damping: 18,
+                  delay: 0.1,
                 }}
                 className="relative"
               >
@@ -215,7 +294,7 @@ export default function Preloader() {
                       duration: 1.3,
                       repeat: Infinity,
                       ease: "easeOut",
-                      delay: 0.4,
+                      delay: 0.3,
                     }}
                   />
                 )}
@@ -259,7 +338,7 @@ export default function Preloader() {
                           type: "spring",
                           stiffness: 180,
                           damping: 13,
-                          delay: 0.8 + index * 0.16,
+                          delay: 0.3 + index * 0.1,
                         }
                   }
                   className={
@@ -276,12 +355,20 @@ export default function Preloader() {
             {/* Tagline */}
             <motion.p
               initial={
-                reduce ? false : { opacity: 0, y: 8 }
+                reduce
+                  ? false
+                  : {
+                      opacity: 0,
+                      y: 8,
+                    }
               }
-              animate={{ opacity: 1, y: 0 }}
+              animate={{
+                opacity: 1,
+                y: 0,
+              }}
               transition={{
-                delay: 2.8,
-                duration: 0.5,
+                delay: 1.5,
+                duration: 0.4,
                 ease: "easeOut",
               }}
               className="mt-3 text-sm text-white/60 sm:text-base"
@@ -294,7 +381,7 @@ export default function Preloader() {
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 2.5 }}
+            transition={{ delay: 1.4 }}
             className="mt-8 flex flex-col items-center"
           >
             <div className="h-[3px] w-40 overflow-hidden rounded-full bg-white/10">
@@ -303,11 +390,13 @@ export default function Preloader() {
                 initial={{ scaleX: 0 }}
                 animate={{ scaleX: 1 }}
                 transition={{
-                  duration: 9.5,
-                  delay: 0.5,
+                  duration: 2.7,
+                  delay: 0.2,
                   ease: "linear",
                 }}
-                style={{ transformOrigin: "left" }}
+                style={{
+                  transformOrigin: "left",
+                }}
               />
             </div>
 
