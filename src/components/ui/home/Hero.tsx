@@ -19,8 +19,9 @@ import {
 import { buttonVariants } from "@/components/ui/button";
 import { SUBJECTS, DISTRICTS } from "@/lib/constants";
 
+// Light mode: solid white field + dark text. Dark mode: translucent field + white text.
 const fieldClass =
-  "h-12 w-full appearance-none rounded-xl border border-border bg-white/70 pl-11 pr-4 text-sm outline-none transition focus-visible:ring-2 focus-visible:ring-ring dark:bg-white/5";
+  "h-12 w-full appearance-none rounded-xl border border-slate-200 bg-white pl-11 pr-4 text-sm text-slate-900 shadow-sm outline-none transition focus-visible:ring-2 focus-visible:ring-ring dark:border-white/10 dark:bg-white/5 dark:text-white dark:[&>option]:bg-[#101828] dark:[&>option]:text-white";
 
 const TYPE_TO_MODE: Record<string, string> = {
   online: "Online",
@@ -56,6 +57,7 @@ export default function Hero() {
 
   return (
     // -mt-20: navbar er pichone porjonto image jabe
+    // Hero always dark thake (light/dark dutei), tai text white-i thakbe
     <section className="relative -mt-20 overflow-hidden bg-[#101828] lg:min-h-[46rem]">
       {/* Desktop: full-bleed background */}
       <div className="absolute inset-0 hidden lg:block">
@@ -67,8 +69,9 @@ export default function Hero() {
           sizes="100vw"
           className="object-cover object-center"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#101828]/80 via-[#101828]/40 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0B1020]/75 via-transparent to-[#0B1020]/35" />
+        {/* Stronger left gradient: image er baked-in text (Trusted Tutors etc.) cover kore */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#101828]/90 via-[#101828]/55 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0B1020]/80 via-transparent to-[#0B1020]/35" />
         <div className="pointer-events-none absolute -right-24 top-24 h-96 w-96 rounded-full bg-[#FF7849]/15 blur-3xl" />
       </div>
 
@@ -85,7 +88,8 @@ export default function Hero() {
         <div className="absolute inset-0 bg-gradient-to-b from-[#0B1020]/55 via-transparent to-[#101828]" />
       </div>
 
-      <div className="relative mx-auto max-w-7xl px-4 pb-14 pt-6 lg:pt-44">
+      {/* More top spacing so the badge doesn't touch the navbar */}
+      <div className="relative mx-auto max-w-7xl px-4 pb-14 pt-8 lg:pt-52">
         <div className="grid items-end gap-10 lg:grid-cols-[1.4fr_1fr]">
           {/* LEFT */}
           <div className="space-y-7">
@@ -168,7 +172,8 @@ export default function Hero() {
               transition={reduce ? undefined : { duration: 5, repeat: Infinity, ease: "easeInOut" }}
               className="w-72 space-y-3"
             >
-              <div className="rounded-2xl border border-white/20 bg-white/12 p-4 backdrop-blur-xl">
+              {/* bg-white/10: Tailwind v3 e valid (bg-white/12 v4 only) */}
+              <div className="rounded-2xl border border-white/20 bg-white/10 p-4 backdrop-blur-xl">
                 <div className="flex items-center gap-3">
                   <span className="btn-accent flex h-12 w-12 items-center justify-center rounded-full text-lg font-bold">
                     T
@@ -185,7 +190,7 @@ export default function Hero() {
                 </div>
               </div>
 
-              <div className="flex items-center gap-3 rounded-2xl border border-white/20 bg-white/12 px-4 py-3 backdrop-blur-xl">
+              <div className="flex items-center gap-3 rounded-2xl border border-white/20 bg-white/10 px-4 py-3 backdrop-blur-xl">
                 <Star className="h-5 w-5 fill-[#E9C9A5] text-[#E9C9A5]" />
                 <div className="leading-tight text-white">
                   <p className="text-lg font-bold">4.9</p>
@@ -196,7 +201,7 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* SEARCH PANEL */}
+        {/* SEARCH PANEL: glass-strong soriye explicit light/dark class */}
         <motion.form
           onSubmit={handleSearch}
           {...(reduce
@@ -206,7 +211,7 @@ export default function Hero() {
                 animate: { opacity: 1, y: 0 },
                 transition: { duration: 0.7, delay: 0.5, ease: "easeOut" as const },
               })}
-          className="glass-strong relative mt-12 rounded-3xl p-5 md:mt-14 md:p-7"
+          className="relative mt-12 rounded-3xl border border-white/40 bg-white/90 p-5 text-slate-900 shadow-2xl shadow-black/25 backdrop-blur-xl dark:border-white/10 dark:bg-[#101828]/70 dark:text-white md:mt-14 md:p-7"
         >
           <h2 className="flex items-center gap-2 text-lg font-bold md:text-xl">
             <GraduationCap className="h-5 w-5 text-[#FF7849]" />
