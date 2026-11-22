@@ -102,15 +102,19 @@ export default function Footer() {
             ))}
           </div>
         </div>
-
         <div>
           <h3 className="mb-4 text-sm font-semibold uppercase tracking-wide">
             Quick Links
           </h3>
           <ul className="space-y-2 text-sm text-muted-foreground">
-            {NAV_LINKS.map((l) => (
+            {[
+              ...NAV_LINKS,
+              { label: "Dashboard", href: "/dashboard" },
+              { label: "Sign In", href: "/sign-in" },
+              { label: "Sign Up", href: "/sign-up" },
+            ].map((l) => (
               <li key={l.href}>
-                <Link href={l.href} className="hover:text-primary">
+                <Link href={l.href} className="transition hover:text-primary">
                   {l.label}
                 </Link>
               </li>
