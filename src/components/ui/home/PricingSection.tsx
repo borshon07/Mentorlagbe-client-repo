@@ -118,7 +118,7 @@ export default function PricingSection() {
             <h3 className="text-xl font-semibold">{p.title} Plans</h3>
             <div className="mt-5 grid flex-1 grid-cols-2 gap-3">
               {" "}
-              <div className="rounded-xl border p-3 sm:p-4">
+              <div className="min-w-0 rounded-xl border p-3 sm:p-4">
                 <p className="text-sm font-semibold uppercase text-muted-foreground">
                   Free
                 </p>
@@ -133,7 +133,7 @@ export default function PricingSection() {
                   ))}
                 </ul>
               </div>
-              <div className="rounded-xl border-2 border-primary bg-primary/5 p-3 sm:p-4">
+              <div className="min-w-0 rounded-xl border-2 border-primary bg-primary/5 p-3 sm:p-4">
                 {" "}
                 <p className="text-sm font-semibold uppercase text-primary">
                   Pro

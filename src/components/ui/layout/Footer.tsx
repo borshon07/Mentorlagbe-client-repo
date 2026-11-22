@@ -81,7 +81,7 @@ export default function Footer() {
     <footer className="mt-16 border-t border-border bg-gradient-to-b from-transparent to-[#101828]/5 dark:to-white/5">
       {" "}
       <div className="mx-auto grid max-w-7xl grid-cols-2 gap-8 px-4 py-10 md:grid-cols-3 md:gap-10 md:py-12">
-        <div className="col-span-2 space-y-4 md:col-span-1">
+        <div className="col-span-2 min-w-0 space-y-4 md:col-span-1">
           <Logo />
           <p className="max-w-xs text-sm text-muted-foreground">
             Find verified tutors and mentorship batches by subject, class level
@@ -102,7 +102,7 @@ export default function Footer() {
             ))}
           </div>
         </div>
-        <div>
+        <div className="min-w-0">
           <h3 className="mb-4 text-sm font-semibold uppercase tracking-wide">
             Quick Links
           </h3>
@@ -122,15 +122,16 @@ export default function Footer() {
           </ul>
         </div>
 
-        <div>
+        <div className="min-w-0">
           <h3 className="mb-4 text-sm font-semibold uppercase tracking-wide">
             Contact
           </h3>
           <ul className="space-y-3 text-sm text-muted-foreground">
-            <li className="flex items-center gap-2">
-              <Mail className="h-4 w-4" /> support@mentorlagbe.com
+            <li className="flex items-start gap-2 break-all">
+              <Mail className="mt-0.5 h-4 w-4 shrink-0" />{" "}
+              support@mentorlagbe.com
             </li>
-            <li className="flex items-center gap-2">
+            <li className="flex items-center gap-2 break-all">
               <Phone className="h-4 w-4" /> +880 1700 000000
             </li>
             <li className="flex items-center gap-2">

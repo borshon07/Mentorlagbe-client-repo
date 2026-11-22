@@ -55,7 +55,7 @@ export default function RootLayout({
         <Preloader />
         <ThemeProvider>
           <Navbar />
-          <div className="flex-1">{children}</div>
+         <div className="min-w-0 flex-1 overflow-x-clip">{children}</div>
           <Footer />
           <Toaster richColors position="bottom-right" />
         </ThemeProvider>
