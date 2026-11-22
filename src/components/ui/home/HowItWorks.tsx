@@ -3,10 +3,26 @@ import Reveal from "@/components/ui/shared/Reveal";
 import SectionHeading from "@/components/ui/shared/SectionHeading";
 
 const STEPS = [
-  { icon: UserPlus, title: "Create an account", text: "Sign up as a student or a tutor in under a minute." },
-  { icon: Search, title: "Search or post", text: "Students filter tuitions. Tutors post batches with a banner." },
-  { icon: Send, title: "Apply and manage", text: "Students apply. Tutors review every applicant." },
-  { icon: CheckCircle2, title: "Start learning", text: "Accepted students begin classes with their tutor." },
+  {
+    icon: UserPlus,
+    title: "Create an account",
+    text: "Sign up as a student or a tutor in under a minute.",
+  },
+  {
+    icon: Search,
+    title: "Search or post",
+    text: "Students filter tuitions. Tutors post batches with a banner.",
+  },
+  {
+    icon: Send,
+    title: "Apply and manage",
+    text: "Students apply. Tutors review every applicant.",
+  },
+  {
+    icon: CheckCircle2,
+    title: "Start learning",
+    text: "Accepted students begin classes with their tutor.",
+  },
 ];
 
 export default function HowItWorks() {
@@ -23,7 +39,7 @@ export default function HowItWorks() {
         <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {STEPS.map((s, i) => (
             <Reveal key={s.title} delay={i * 100} className="h-full">
-              <div className="glass group relative flex h-full flex-col items-center rounded-2xl p-6 text-center transition hover:-translate-y-1">
+              <div className="glass liquid-card group relative flex h-full flex-col items-center rounded-2xl p-6 text-center">
                 <span className="btn-accent absolute -top-3 left-5 rounded-full px-2.5 py-0.5 text-xs font-bold">
                   {i + 1}
                 </span>
@@ -31,7 +47,9 @@ export default function HowItWorks() {
                   <s.icon className="h-7 w-7" />
                 </span>
                 <h3 className="mt-5 text-lg font-semibold">{s.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{s.text}</p>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                  {s.text}
+                </p>
               </div>
             </Reveal>
           ))}

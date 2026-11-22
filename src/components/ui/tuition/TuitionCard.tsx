@@ -6,7 +6,7 @@ import type { Tuition } from "@/types";
 
 export default function TuitionCard({ tuition }: { tuition: Tuition }) {
   return (
-    <div className="glass group flex h-full flex-col overflow-hidden rounded-2xl transition duration-300 hover:-translate-y-1 hover:shadow-xl">
+    <div className="glass liquid-card group flex h-full flex-col overflow-hidden rounded-2xl">
       <div className="relative h-44 w-full overflow-hidden bg-muted">
         {tuition.bannerImage ? (
           <Image

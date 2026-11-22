@@ -111,7 +111,7 @@ export default function PricingSection() {
         {PLANS.map((p) => (
           <div
             key={p.key}
-            className="glass flex h-full flex-col rounded-2xl p-6"
+            className="glass liquid-card flex h-full flex-col rounded-2xl p-6"
           >
             <h3 className="text-xl font-semibold">{p.title} Plans</h3>
 
