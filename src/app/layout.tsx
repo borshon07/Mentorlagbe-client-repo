@@ -5,6 +5,7 @@ import Navbar from "@/components/ui/layout/Navbar";
 import Footer from "@/components/ui/layout/Footer";
 import ThemeProvider from "@/components/ui/layout/themeProvider";
 import "./globals.css";
+import Preloader from "@/components/ui/shared/preloader";
 
 const jakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -43,6 +44,7 @@ export default function RootLayout({
     >
       <body className="flex min-h-screen flex-col font-sans antialiased">
         <ThemeProvider>
+          <Preloader />
           <Navbar />
           <div className="flex-1">{children}</div>
           <Footer />
