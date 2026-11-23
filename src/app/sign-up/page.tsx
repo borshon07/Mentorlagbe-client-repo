@@ -138,8 +138,13 @@ export default function SignUpPage() {
             placeholder="At least 8 characters"
             {...register("password")}
           />
-          {errors.password && (
+          {errors.password ? (
             <p className="text-sm text-red-500">{errors.password.message}</p>
+          ) : (
+            <p className="text-xs text-muted-foreground">
+              Use 8+ characters with uppercase, lowercase, a number and a
+              special character.
+            </p>
           )}
         </div>
 
