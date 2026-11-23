@@ -19,6 +19,7 @@ MentorLagbe is a smart tuition and mentorship platform. Students find verified t
 ## Key Features
 
 - Role-based authentication (Student, Tutor, Admin) with BetterAuth and JWT
+- Password policy (8+ chars with uppercase, lowercase, number and special character) and English-only name validation, enforced on client and server
 - Google social login
 - Home page: hero search, featured tuitions, pricing, how it works, subjects, testimonials
 - Browse Tuitions with server-side search, filters (subject, class level, mode, district) and pagination
